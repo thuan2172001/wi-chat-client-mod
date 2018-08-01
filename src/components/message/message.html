@@ -1,2 +1,40 @@
-<div ng-if="!self.isSentMesg" ng-bind-html="self.sendMesg"></div>
-<div ng-if="self.isSentMesg" ng-bind-html="self.receiveMesg"></div>
+<div ng-if="!self.isSentMesg">
+    <div class="incoming_msg">
+        <div class="incoming_msg_img">
+            <img ng-if="!self.avatar" ng-src="https://ptetutorials.com/images/user-profile.png">
+            <img ng-if="self.avatar" ng-src="{{self.avatar}}">
+        </div>
+        <div class="received_msg">
+            <div class="received_withd_msg">
+                <!-- <p>Test, which is a new approach to have</p> -->
+                <p>
+                    <!-- <chat-text 
+                     text="self.text">
+                    </chat-text> -->
+                    <chat-content 
+                     content="self.text"
+                     type="self.type">
+                    </chat-content>
+                </p>
+                <!-- <span class="time_date">{{self.time}}</span> -->
+                <span class="time_date">{{self.time | date: "MM/dd/yyyy 'at' h:mma"}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-if="self.isSentMesg">
+    <div class="outgoing_msg">
+        <div class="sent_msg">
+            <p>
+                <!-- <chat-text text="self.text"></chat-text> -->
+                <chat-content 
+                    content="self.text"
+                    type="self.type">
+                </chat-content>
+            </p>
+            <span class="time_date">{{self.time | date: "MM/dd/yyyy 'at' h:mma"}}</span>
+        </div>
+    </div>
+</div>

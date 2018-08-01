@@ -1,0 +1,18 @@
+<chat-text
+ ng-if="self.isText()"
+ text="self.content"
+></chat-text>
+
+<img-preview
+ ng-if="self.isImage()"
+ small-img-link="self.imgThumb()"
+ download-link="self.imgDownload()"
+ full-img-link="self.imgGetImageOrigin()">
+</img-preview>
+
+<a
+ style="color: cyan"
+ ng-if="self.isFile()"
+ href="{{self.content}}" 
+ ng-bind="self.content">
+</a>

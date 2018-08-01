@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8857682d63f182813bc9";
+/******/ 	var hotCurrentHash = "26c424d6f2f15d75378f";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -39382,7 +39382,7 @@ exports.default = [_browser2.default];
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light\" style=\"border-bottom:solid 1px #999\"> <a class=navbar-brand href=#></a> <a href=# style=color:#000 ng-click=self.logout()>Logout</a> </nav> <div class=mesgs> <div class=msg_history> <message is-sent-mesg=false></message> <message is-sent-mesg=true></message> </div> <div class=type_msg> <div class=input_msg_write> <textarea placeholder=\"Type a message\" style=width:100%;height:105px></textarea> <button class=msg_send_btn type=button> <i class=\"fas fa-paper-plane\"></i> </button> </div> </div> </div>";
+module.exports = "<nav class=\"navbar navbar-light\" style=\"border-bottom:solid 1px #999;position:relative\"> <a class=navbar-brand href=#></a> <a href=# style=color:#000 ng-click=self.logout()>Logout</a> </nav> <div class=mesgs> <div class=msg_history> <message is-sent-mesg=false></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> <message is-sent-mesg=true></message> </div> <div class=type_msg> <div class=input_msg_write> <textarea placeholder=\"Type a message\" style=width:100%;height:105px></textarea> <button class=msg_send_btn type=button> <i class=\"fas fa-paper-plane\"></i> </button> </div> </div> </div>";
 
 /***/ }),
 

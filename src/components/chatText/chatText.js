@@ -21,8 +21,10 @@ function controller($sce) {
         preProcess();
     }
 
+    self.getHtml = () => $sce.trustAsHtml(self.text)
+
     function preProcess() {
-        self.text = $sce.trustAsHtml(replaceText(self.text))  ;
+        self.text = replaceText(self.text)  ;
         // console.log({'self.text': self.text})
     }
 

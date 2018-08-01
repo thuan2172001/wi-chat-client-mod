@@ -1,12 +1,18 @@
-<nav class="navbar navbar-light" style="border-bottom: solid 1px #999;">
+<nav class="navbar navbar-light" style="border-bottom: solid 1px #999;position: relative;">
     <a class="navbar-brand" href="#"></a>
     <a href="#" style="color: black" ng-click="self.logout()">Logout</a>
     
 </nav>
 <div class="mesgs">
     <div class="msg_history">
-        <message is-sent-mesg="false"></message>
-        <message is-sent-mesg="true"></message>
+        <message 
+         ng-repeat="m in self.listMessage track by $index"
+         avatar="m.avatar"
+         text="m.content"
+         is-sent-mesg="m.isSent()"
+         time="m.sendAt"
+         type="m.type">
+        </message>
     
     </div>
     <div class="type_msg">

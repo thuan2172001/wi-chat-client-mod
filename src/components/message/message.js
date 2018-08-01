@@ -1,6 +1,6 @@
 import template from './message.html'
-import sendMesg from './send-message.html'
-import receiveMesg from './receive-message.html'
+// import sendMesg from './send-message.html'
+// import receiveMesg from './receive-message.html'
 // import './chatBoard.css'
 
 const name = 'message'
@@ -16,8 +16,9 @@ function controller($sce) {
 
 
     function preProcess() {
-        self.sendMesg = $sce.trustAsHtml(sendMesg) 
-        self.receiveMesg = $sce.trustAsHtml(receiveMesg)
+        // self.sendMesg = $sce.trustAsHtml(sendMesg) 
+        // self.receiveMesg = $sce.trustAsHtml(receiveMesg)
+        //console.log({'time':self.time})
     }
     
 }
@@ -29,7 +30,8 @@ export default {
             avatar: '<',
             text: '<',
             time: '<',
-            isSentMesg:'<'
+            isSentMesg:'<',
+            type: '<'
         },
         template,
         controller,
