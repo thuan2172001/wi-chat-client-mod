@@ -1,4 +1,5 @@
 import template from './message.html'
+import './message.css'
 // import sendMesg from './send-message.html'
 // import receiveMesg from './receive-message.html'
 // import './chatBoard.css'
@@ -14,11 +15,24 @@ function controller($sce) {
         preProcess()
     }
 
-
     function preProcess() {
-        // self.sendMesg = $sce.trustAsHtml(sendMesg) 
-        // self.receiveMesg = $sce.trustAsHtml(receiveMesg)
-        //console.log({'time':self.time})
+        
+        self.isImage = self.type === 'image'
+        if(self.type === 'text')
+            self.text = breakLineText(self.text)
+    }
+
+    function breakLineText(str) {
+        const MAX_STR_LENGTH = 65
+        const SPECIAL_CHAR = [':', '|', '8']
+        const br = '<br>'
+        const strLen = str.length
+
+        return str
+    }
+
+    function isAlphabetOrDigit(c) {
+        return /^([A-Z]|[0-9])$/i.test(c)
     }
     
 }

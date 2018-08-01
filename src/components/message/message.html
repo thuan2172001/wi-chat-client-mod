@@ -7,7 +7,7 @@
         <div class="received_msg">
             <div class="received_withd_msg">
                 <!-- <p>Test, which is a new approach to have</p> -->
-                <p>
+                <p ng-class="{'no-backgroud': self.isImage}">
                     <!-- <chat-text 
                      text="self.text">
                     </chat-text> -->
@@ -27,7 +27,7 @@
 <div ng-if="self.isSentMesg">
     <div class="outgoing_msg">
         <div class="sent_msg">
-            <p>
+            <p ng-class="{'no-backgroud': self.isImage}">
                 <!-- <chat-text text="self.text"></chat-text> -->
                 <chat-content 
                     content="self.text"
