@@ -9,6 +9,14 @@ function controller(auth) {
     
     self.$onInit = function() {
         preProcess()
+
+        auth.onLoginSuccess(() => {
+            self.isLogin = true
+        })
+
+        auth.onLogoutSuccess(() => {
+            self.isLogin = false
+        })
     }
 
     function preProcess() {

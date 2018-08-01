@@ -55,24 +55,24 @@ function service ($http, Upload) {
             cb();
         });
     }
-    this.login = function(data, cb) {
-        $http({
-            method: 'POST',
-            url: LOGIN,
-            data: data
-        }).then(function successCallback(response) {
-            if (response.data.code != 200) {
-                console.error(response.data.reason);
-                cb();
-            } else {
-                cb(response.data.content);
-            }
-        }, function errorCallback(response) {
-            console.error(response);
-            if(toastr) toastr.error(response);
-            cb();
-        });
-    }
+    // this.login = function(data, cb) {
+    //     $http({
+    //         method: 'POST',
+    //         url: LOGIN,
+    //         data: data
+    //     }).then(function successCallback(response) {
+    //         if (response.data.code != 200) {
+    //             console.error(response.data.reason);
+    //             cb();
+    //         } else {
+    //             cb(response.data.content);
+    //         }
+    //     }, function errorCallback(response) {
+    //         console.error(response);
+    //         if(toastr) toastr.error(response);
+    //         cb();
+    //     });
+    // }
     this.getConversation = function(token, data, cb){
         doPost(GET_CONVERSATION, token, data, cb);
     }

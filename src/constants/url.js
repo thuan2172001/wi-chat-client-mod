@@ -1,0 +1,1 @@
+export const ROOT = 'http://chat.dev.i2g.cloud'
