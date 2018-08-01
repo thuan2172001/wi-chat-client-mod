@@ -3,7 +3,14 @@ import template from './chatBoard.html'
 
 const name = 'chatBoard'
 
-function controller() {
+controller.$inject = ['auth']
+function controller(auth) {
+
+    const self = this
+
+    self.logout = function() {
+        auth.logout()
+    }
 
 }
 

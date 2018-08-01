@@ -28,7 +28,8 @@ function service($rootScope, $http) {
                 console.error(response.data.reason);
                 cb();
             } else {
-                const token = response.data.content
+                const {token} = response.data.content
+                console.log({token})
                 loginSuccess(token);
                 cb(token);
 
@@ -63,12 +64,24 @@ function service($rootScope, $http) {
         localStorage.setItem(jwt_token, token)
     }
 
+    function getToken() {
+        return localStorage.getItem(jwt_token)
+    }
+
+    function getData() {
+        const token = getToken()
+        const data = atob(token.split('.')[1])
+        return JSON.parse(data)
+    }
+
     return {
         isLogin,
         loginSubmit,
         onLoginSuccess,
         logout,
-        onLogoutSuccess
+        onLogoutSuccess,
+        getToken,
+        getData
     }
 }
 

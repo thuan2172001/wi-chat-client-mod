@@ -27,9 +27,18 @@
                 </div>
             </div>
         </div> -->
-        <inbox-people is-chosen="true"></inbox-people>
+        <!-- <inbox-people is-chosen="true"></inbox-people>
         <inbox-people></inbox-people>
         <inbox-people></inbox-people>
-        <inbox-people></inbox-people>
+        <inbox-people></inbox-people> -->
+        <inbox-people 
+         ng-repeat="people in self.listPeople track by $index"
+         is-chosen="people.isChosen"
+         people-name="people.name"
+         latest-mesg="people.getLatestMsg().content"
+         time="people.getLatestMsg().sendAt"
+         >
+        </inbox-people>
+        
     </div>
 </div>
