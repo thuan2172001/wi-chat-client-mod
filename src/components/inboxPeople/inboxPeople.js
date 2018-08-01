@@ -16,7 +16,7 @@ export default {
             isChosen: '<',
             peopleName: '<',
             latestMesg: '<',
-            date:'<'
+            time:'<'
         },
         template,
         controller,

@@ -1,6 +1,6 @@
 import angular from 'angular';
 import components from './components';
-// import services from './services';
+import services from './services';
 
 const appName = 'app';
 let app = angular.module(appName, []);
@@ -10,9 +10,9 @@ assignAllComponent();
 
 
 function assignAllService() {
-    // services.forEach(f => {
-    //     app.factory(f.name, f.options);
-    // })
+    services.forEach(f => {
+        app.factory(f.name, f.options);
+    })
 }
 
 function assignAllComponent() {

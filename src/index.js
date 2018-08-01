@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-free'
 import 'jquery'
 import 'popper.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import'@fortawesome/fontawesome-free/js/all'
 
 import './module'
 
