@@ -9,7 +9,8 @@ module.exports = {
   output: {
     filename: 'app.js',
     //path: path.resolve(__dirname, 'public')
-    path: path.join(__dirname, 'public')
+    path: path.join(__dirname, 'public'),
+    // publicPath: './static'
   },
   module: {
     rules: [
@@ -21,17 +22,6 @@ module.exports = {
           'sass-loader'
         ]
       },
-      // {
-      //   test: /\.html$/,
-      //   use: [{
-      //     loader: 'html-loader',
-      //     options: {
-      //       minimize: true
-      //     }
-      //   }],
-      // },
-      { test: /\.jpg$/, use: ["file-loader"] },
-      { test: /\.png$/, use: ["url-loader?mimetype=image/png"] },
       {
         test: /\.html$/,
         use: [{
@@ -46,6 +36,19 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['env']
+        }
+      },
+      {
+        test: /\.(png|jpg)$/, use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            //outputPath: '../../img/' //define the output of the file (relative path to the workdir)
+          }
+          // options: {
+          //     name: '[name].[ext]',
+          //     outputPath: '../../img/'
+          // }
         }
       }
     ]

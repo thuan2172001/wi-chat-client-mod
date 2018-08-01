@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/components/chatText/chatText.html"],"names":[],"mappings":";;;;;;;;;AAAA,sF","file":"main.737add18a373037486cb.hot-update.js","sourcesContent":["module.exports = \"<div class=chat-message> <div ng-bind-html=self.text></div> </div>\";"],"sourceRoot":""}
