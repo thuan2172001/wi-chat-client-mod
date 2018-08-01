@@ -1,4 +1,4 @@
-let name = 'apiService';
+let name = 'api';
 const URL = 'http://chat.sflow.me';
 // const URL = 'http://api.chat.dev.i2g.cloud/'
 // const URL = 'http://127.0.0.1:5001';
@@ -13,6 +13,7 @@ const UPLOAD = URL + '/api/upload';
 const THUMB = URL + '/api/thumb';
 // angular.module(moduleName, []).service(serviceName, );
 
+service.$inject = ['$http', 'Upload']
 function service ($http, Upload) {
     let doPost = function(URL, token, data, cb) {
         $http({

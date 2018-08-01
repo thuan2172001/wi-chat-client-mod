@@ -3,7 +3,25 @@ import template from './sidebar.html'
 
 const name = 'sidebar'
 
-function controller() {
+controller.$inject = ['api']
+function controller(api) {
+
+    const self = this
+
+    self.$onInit = function () {
+        preProcess()
+        init()
+    }
+
+
+    function preProcess() {
+        self.listPeople = []
+    }
+
+    function init() {
+        api.getListConversation()
+    }
+
 
 }
 
