@@ -19,7 +19,7 @@ function controller(api) {
     }
 
     function init() {
-        api.getListConversation()
+        
     }
 
 

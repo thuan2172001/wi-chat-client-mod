@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   //entry: path.join(__dirname, 'src', 'index.js'),
@@ -13,10 +14,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(scss|css|sass)$/,
         use: [
           'style-loader',
           'css-loader',
+          'sass-loader'
         ]
       },
       // {
@@ -46,6 +48,11 @@ module.exports = {
           presets: ['env']
         }
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
     ]
   },
   plugins: [

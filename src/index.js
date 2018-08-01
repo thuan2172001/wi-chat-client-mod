@@ -8,9 +8,11 @@ import'@fortawesome/fontawesome-free/js/all'
 
 import './module'
 
-const app = '<app></app>'
+// const login = '<login></login>'
 
-render(app, document.getElementById('app-root'))
+const browser = '<browser></browser>'
+
+render(browser, document.getElementById('app-root'))
 
 function render(component, locatedEl) {
     locatedEl.innerHTML = component

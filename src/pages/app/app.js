@@ -1,5 +1,5 @@
 import template from './app.html'
-import './app.css'
+import './app.scss'
 
 const name = 'app'
 
