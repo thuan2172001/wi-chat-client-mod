@@ -1,6 +1,11 @@
+html,body, #app-root, .messaging, .inbox_msg, .inbox_people, .inbox_chat, .mesgs, .msg_history {
+    height: 100%;
+}
+
 .container {
     max-width: 1170px;
     margin: auto;
+    padding: 0 20px;
 }
 
 img {
@@ -11,7 +16,7 @@ img {
     background: #f8f8f8 none repeat scroll 0 0;
     float: left;
     overflow: hidden;
-    width: 40%;
+    width: 30%;
     border-right: 1px solid #c4c4c4;
 }
 
@@ -152,8 +157,9 @@ img {
 
 .mesgs {
     float: left;
-    padding: 30px 15px 0 25px;
-    width: 60%;
+    padding: 0px 0px 0 25px;
+    width: 70%;
+    margin-top: 5px;
 }
 
 .sent_msg p {
@@ -176,7 +182,7 @@ img {
     width: 46%;
 }
 
-.input_msg_write input {
+.input_msg_write textarea {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
     color: #4c4c4c;
@@ -188,6 +194,7 @@ img {
 .type_msg {
     border-top: 1px solid #c4c4c4;
     position: relative;
+    margin-right: 16px;
 }
 
 .msg_send_btn {
@@ -205,7 +212,7 @@ img {
 }
 
 .messaging {
-    padding: 0 0 50px 0;
+    /* padding: 0 0 50px 0; */
 }
 
 .msg_history {

@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
 module.exports = {
   //entry: path.join(__dirname, 'src', 'index.js'),
@@ -48,7 +49,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin()
   ],
   devServer: {
     hot: true,
