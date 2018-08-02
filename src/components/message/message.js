@@ -24,40 +24,40 @@ function controller($sce) {
     function preProcess() {
 
         self.isImage = self.type === 'image'
-        if (self.type === 'text')
-            self.text = breakLineText(self.text)
+        // if (self.type === 'text')
+        //     self.text = breakLineText(self.text)
     }
 
-    function breakLineText(str) {
-        const MAX_STR_LENGTH = 59
-        const SPECIAL_CHAR = [':', '|', '8']
-        const br = '<br>'
-        // const STR_LEN = str.length
+    // // function breakLineText(str) {
+    // //     const MAX_STR_LENGTH = 59
+    // //     const SPECIAL_CHAR = [':', '|', '8']
+    // //     const br = '<br>'
+    // //     // const STR_LEN = str.length
 
 
-        let start = MAX_STR_LENGTH - 1
-        // console.log({str})
-        while (start < str.length) {
+    // //     let start = MAX_STR_LENGTH - 1
+    // //     // console.log({str})
+    // //     while (start < str.length) {
 
-            if (isAlphabetOrDigit(str[start]) || (!isAlphabetOrDigit(str[start]) && isAlphabetOrDigit(str[start + 1]))) {
+    // //         if (isAlphabetOrDigit(str[start]) || (!isAlphabetOrDigit(str[start]) && isAlphabetOrDigit(str[start + 1]))) {
 
-                const before = str.substring(0, start)
-                const after = str.substring(start, str.length)
-                // console.log({before, after})
-                str = before + br + after
-                start += MAX_STR_LENGTH + br.length
-            } else {
-                ++start
-            }
+    // //             const before = str.substring(0, start)
+    // //             const after = str.substring(start, str.length)
+    // //             // console.log({before, after})
+    // //             str = before + br + after
+    // //             start += MAX_STR_LENGTH + br.length
+    // //         } else {
+    // //             ++start
+    // //         }
 
-        }
+    // //     }
 
-        return str
-    }
+    // //     return str
+    // // }
 
-    function isAlphabetOrDigit(c) {
-        return /^([A-Z]|[0-9])$/i.test(c)
-    }
+    // function isAlphabetOrDigit(c) {
+    //     return /^([A-Z]|[0-9])$/i.test(c)
+    // }
 
 }
 

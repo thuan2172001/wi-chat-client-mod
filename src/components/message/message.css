@@ -1,3 +1,9 @@
-.no-backgroud {
+.message-component .no-backgroud {
     background: none !important;
+}
+
+.message-component .break-line{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }

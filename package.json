@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dashboard -- webpack-dev-server --config 'webpack.config.js'",
+    "dev": "webpack-dev-server --config 'webpack.config.js'",
+    "dashboard": "webpack-dashboard -- webpack-dev-server --config 'webpack.config.js'",
     "build": "webpack -w"
   },
   "repository": {
