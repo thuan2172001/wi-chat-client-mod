@@ -18,6 +18,17 @@ function controller($rootScope) {
     //     return prefix + self.userName
     // }
 
+    // function randomInt () {
+    //     const PARAM = 10000
+    //     return Math.floor(Math.random() * PARAM)
+    // }
+    function strToNum(str) {
+        const first = str.charCodeAt(0) || 0
+        const sec = str.charCodeAt(1) || 0
+
+        return first + sec
+    }
+
     function preProcess() {
         self.width = self.height = 39.23
         self.src = LetterAvatar(self.userName, self.width)
@@ -38,8 +49,8 @@ function controller($rootScope) {
         let d = document
 
         var colours = [
-                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", 
-                "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
+                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#16a085", "#27ae60", "#2980b9", "#8e44ad", 
+                "#f1c40f", "#e67e22", "#e74c3c", "#f39c12", "#d35400", "#c0392b"
             ],
 
             nameSplit = String(name).toUpperCase().split(' '),
@@ -55,15 +66,20 @@ function controller($rootScope) {
         if (w.devicePixelRatio) {
             size = (size * w.devicePixelRatio);
         }
-            
-        charIndex     = (initials == '?' ? 72 : initials.charCodeAt(0)) - 64;
-        colourIndex   = charIndex % 20;
+        
+        // charIndex     = (initials == '?' ? 72 : initials.charCodeAt(0)) - 64;
+        // colourIndex   = charIndex % 20;
+        // colourIndex = Math.random() % colours.length
+        // colourIndex = randomInt() % colours.length
+        colourIndex = strToNum(self.userName) % colours.length
+        console.log({colourIndex})
         canvas        = d.createElement('canvas');
         canvas.width  = size;
         canvas.height = size;
         context       = canvas.getContext("2d");
          
-        context.fillStyle = colours[colourIndex - 1];
+        context.fillStyle = colours[colourIndex];
+        console.log({'context-fils':colours[colourIndex]})
         context.fillRect (0, 0, canvas.width, canvas.height);
         context.font = Math.round(canvas.width/2)+"px Arial";
         context.textAlign = "center";
