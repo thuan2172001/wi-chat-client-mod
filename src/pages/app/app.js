@@ -9,6 +9,7 @@ function controller(api, auth) {
     const self = this
     const token = auth.getToken()
     const {username} = auth.getData()
+    const thisUser = auth.getThisUser()
 
     self.$onInit = function () {
         preProcess()
@@ -18,14 +19,20 @@ function controller(api, auth) {
     self.chooseConversation = function(people) {
         self.listMessage = people.Messages.map(m => {
             m.isSent = () => m.User.username === username
-
+            
             return m
         })
+
+        self.curConversationId = people.id
     }
 
     function preProcess() {
         self.listPeople = []
         self.listMessage= []
+        self.thisUser = thisUser
+        self.curConversationId = -1
+
+        console.log(auth.getThisUser())
     }
 
     function init() {

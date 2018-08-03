@@ -14,7 +14,11 @@
                  list-people="self.listPeople"
                  choose-conversation="self.chooseConversation">
                 </sidebar>
-                <chat-board list-message="self.listMessage"></chat-board>
+                <chat-board 
+                 list-message="self.listMessage"
+                 this-user="self.thisUser"
+                 cur-conver-id="self.curConversationId">
+                </chat-board>
             </div>
     
         </div>

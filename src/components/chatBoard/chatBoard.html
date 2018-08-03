@@ -19,8 +19,11 @@
     <div class="type_msg">
         <div class="input_msg_write">
             <!-- <input type="text-" class="write_msg" placeholder="Type a message" /> -->
-            <textarea placeholder="Type a message" style="width: 100%;height: 105px"></textarea>
-            <button class="msg_send_btn" type="button">
+            <textarea 
+             placeholder="Type a message" 
+             style="width: 100%;height: 105px"
+             ng-model="self.text"></textarea>
+            <button class="msg_send_btn" type="submit" ng-click="self.submitText()">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>

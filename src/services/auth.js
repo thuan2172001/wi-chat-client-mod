@@ -3,6 +3,7 @@ const name = 'auth'
 service.$inject = ['$rootScope', '$http']
 function service($rootScope, $http) {
     const jwt_token = 'jwt-token'
+    const data_user = 'data_user'
     const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
     const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 
@@ -28,9 +29,9 @@ function service($rootScope, $http) {
                 console.error(response.data.reason);
                 cb();
             } else {
-                const {token} = response.data.content
+                const {token, user} = response.data.content
                 //console.log({token})
-                loginSuccess(token);
+                loginSuccess(token, user);
                 cb(token);
 
             }
@@ -59,9 +60,10 @@ function service($rootScope, $http) {
     }
     
 
-    function loginSuccess(token) {
+    function loginSuccess(token, user) {
         $rootScope.$emit(LOGIN_SUCCESS)
         localStorage.setItem(jwt_token, token)
+        localStorage.setItem(data_user, JSON.stringify(user))
     }
 
     function getToken() {
@@ -74,6 +76,10 @@ function service($rootScope, $http) {
         return JSON.parse(data)
     }
 
+    function getThisUser() {
+        return JSON.parse(localStorage.getItem(data_user))
+    }
+
     return {
         isLogin,
         loginSubmit,
@@ -81,7 +87,8 @@ function service($rootScope, $http) {
         logout,
         onLogoutSuccess,
         getToken,
-        getData
+        getData,
+        getThisUser
     }
 }
 
