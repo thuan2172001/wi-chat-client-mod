@@ -21,7 +21,21 @@ function controller($sce) {
         preProcess();
     }
 
-    self.getHtml = () => $sce.trustAsHtml(self.text)
+    self.getHtml = () => {
+        const rules = [{
+            encode: '&lt',
+            str: '<'
+        }, {
+            encode: '&gt',
+            str: '>'
+        }]
+        let text = self.text
+        rules.forEach(r => {
+            text = text.replace(r.encode, r.str)
+        })
+
+        return $sce.trustAsHtml(text)
+    }
 
     function preProcess() {
         self.text = replaceText(self.text)  ;
