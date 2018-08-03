@@ -23,6 +23,9 @@ function controller(auth, api, io) {
                 // console.log({data})
                 // console.log({'self.listMesg' : self.listMessage})
                 self.sendMessageSuccess(data)
+
+                //scroll to bottom
+                scroll()
             })
         })
     }
@@ -31,6 +34,7 @@ function controller(auth, api, io) {
         if (listMessage) self.listMessage = listMessage.currentValue
         if (curConverId) self.curConverId = curConverId.currentValue
         if (thisUser) self.thisUser = thisUser.currentValue
+        scroll()
 
         // console.log({ listMessage, curConverId, thisUser })
 
@@ -84,6 +88,13 @@ function controller(auth, api, io) {
 
         return text;
 
+    }
+
+    function scroll() {
+        setTimeout(() => {
+            const chatBoard = document.querySelector('.msg_history')
+            chatBoard.scrollTo(0, chatBoard.scrollHeight)
+        }, 100)
     }
 
     function checkSubmit(cb) {
