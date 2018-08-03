@@ -2,8 +2,12 @@
     <div ng-if="!self.isSentMesg">
         <div class="incoming_msg">
             <div class="incoming_msg_img">
-                <img ng-if="!self.avatar" ng-src="https://ptetutorials.com/images/user-profile.png">
-                <img ng-if="self.avatar" ng-src="{{self.avatar}}">
+                <!-- <img ng-if="!self.avatar" ng-src="https://ptetutorials.com/images/user-profile.png">
+                <img ng-if="self.avatar" ng-src="{{self.avatar}}"> -->
+                <avatar
+                    img-src="self.avatar"
+                    user-name="self.userName">
+                </avatar>
             </div>
             <div class="received_msg">
                 <div class="received_withd_msg">

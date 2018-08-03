@@ -140,6 +140,8 @@ function controller($sce) {
     // }
 
     function replaceText(str) {
+        if(!str) return str
+
         const listIconsVerbose = str.match(regex);
         //console.log({listIconsVerbose});
         //remove duplicate

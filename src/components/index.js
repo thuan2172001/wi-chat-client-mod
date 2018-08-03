@@ -5,6 +5,7 @@ import inboxPeople from './inboxPeople/inboxPeople'
 import message from './message/message'
 import imgPreview from './imgPreview/imgPreview'
 import chatText from './chatText/chatText'
+import avatar from './avatar/avatar'
 
 export default [
     // app,
@@ -13,5 +14,6 @@ export default [
     inboxPeople,
     message,
     imgPreview,
-    chatText
+    chatText,
+    avatar
 ]

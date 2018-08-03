@@ -1,7 +1,13 @@
 <div class="chat_list" ng-class="{'active_chat': self.isChosen}" style="cursor: pointer;">
     <div class="chat_people">
         <div class="chat_img">
-            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+            <!-- <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> -->
+            <avatar
+             img-src="self.imgSrc"
+             user-name="self.showName()">
+            </avatar>
+         </div>
+            
         <div class="chat_ib">
             <h5>{{self.showName()}}
                 <span class="chat_date">

@@ -1,0 +1,10 @@
+<div class="avatar">
+    <img ng-if="self.imgSrc" ng-src="{{self.imgSrc}}" alt="cannot load avatar">
+    <img 
+     ng-if="!self.imgSrc" 
+     ng-src="{{self.src}}"
+     class="round" 
+     width="39.23" 
+     height="39.23"
+     alt="{{self.userName}}">
+</div>

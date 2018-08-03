@@ -65,6 +65,7 @@ export default {
     name,
     options: {
         bindings: {
+            userName:'<',
             avatar: '<',
             text: '<',
             time: '<',

@@ -10,7 +10,7 @@ function controller(auth) {
 
     self.$onChanges = function({listMessage}){
         self.listMessage = listMessage.currentValue
-        // console.log(self.listMessage)
+        // console.log(self.listMessage[0].User.username)
     }
 
     self.logout = function() {
