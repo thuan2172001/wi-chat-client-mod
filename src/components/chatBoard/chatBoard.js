@@ -3,13 +3,28 @@ import template from './chatBoard.html'
 
 const name = 'chatBoard'
 
-controller.$inject = ['auth', 'api']
-function controller(auth, api) {
+controller.$inject = ['auth', 'api', 'io']
+function controller(auth, api, io) {
 
     const self = this
 
     self.$onInit = function () {
         preProcess()
+
+        io.onConnect(() => {
+            io.onSendMessage(data => {
+
+                // console.log('send')
+                // self
+                //     .listMessage
+                //     .filter(function (conver) {
+                //         return conver.id == data.idConversation;
+                //     })[0].Messages.push(data);
+                // console.log({data})
+                // console.log({'self.listMesg' : self.listMessage})
+                self.sendMessageSuccess(data)
+            })
+        })
     }
 
     self.$onChanges = function ({ listMessage, curConverId, thisUser }) {
@@ -17,7 +32,7 @@ function controller(auth, api) {
         if (curConverId) self.curConverId = curConverId.currentValue
         if (thisUser) self.thisUser = thisUser.currentValue
 
-        console.log({ listMessage, curConverId, thisUser })
+        // console.log({ listMessage, curConverId, thisUser })
 
         // console.log(self.listMessage)
         // console.log(self.listMessage[0].User.username)
@@ -26,7 +41,7 @@ function controller(auth, api) {
     self.submitText = function () {
         checkSubmit(() => {
             const content = self.text.split('\n').join('<br/>');
-            console.log({ content })
+            // console.log({ content })
             // const idConversation = self
             let message = {
                 content: preventXSS(content),
@@ -37,7 +52,7 @@ function controller(auth, api) {
                 sendAt: new Date((new Date()).getTime())
             };
             api.postMessage(message, auth.getToken(), function (res) {
-                if(res) preProcess()
+                if (res) preProcess()
             });
         })
 
@@ -82,7 +97,8 @@ export default {
         bindings: {
             listMessage: '<',
             thisUser: '<',
-            curConverId: '<'
+            curConverId: '<',
+            sendMessageSuccess: '<'
         },
         template,
         controller,

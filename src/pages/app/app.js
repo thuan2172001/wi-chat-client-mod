@@ -3,8 +3,8 @@ import './app.scss'
 
 const name = 'app'
 
-controller.$inject = ['api', 'auth']
-function controller(api, auth) {
+controller.$inject = ['api', 'auth', 'io']
+function controller(api, auth, io) {
 
     const self = this
     const token = auth.getToken()
@@ -26,6 +26,13 @@ function controller(api, auth) {
         self.curConversationId = people.id
     }
 
+    self.sendMessageSuccess = function(data) {
+        console.log({'self.listMessage': self.listMessage})
+        console.log({data})
+        data.isSent = () => data.User.username === username
+        self.listMessage.push(data)
+    }
+
     function preProcess() {
         self.listPeople = []
         self.listMessage= []
@@ -34,6 +41,7 @@ function controller(api, auth) {
 
         console.log(auth.getThisUser())
     }
+    
 
     function init() {
         // const token = auth.getToken()
@@ -42,6 +50,24 @@ function controller(api, auth) {
             self.listPeople = resp.list
                 .filter(p => p.Messages.length)
             // console.log({'self.listPeople' : self.listPeople})
+
+            io.connect()
+            io.onConnect(() => {
+                joinAllRoom(resp.list.map(el => el.id))
+            })
+        })
+
+        
+    }
+
+    function joinAllRoom(listConver) {
+        console.log({listConver})
+        console.log({username})
+        listConver.forEach(c => {
+            io.joinRoom({
+                username,
+                idConversation: c
+            })
         })
     }
 

@@ -29,7 +29,7 @@ function controller($sce) {
             encode: '&gt',
             str: '>'
         }]
-        let text = self.text
+        let text = self.text || ''
         rules.forEach(r => {
             text = text.replace(r.encode, r.str)
         })
