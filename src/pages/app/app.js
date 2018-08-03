@@ -17,11 +17,21 @@ function controller(api, auth, io) {
     }
 
     self.chooseConversation = function(people) {
-        self.listMessage = people.Messages.map(m => {
+
+        // assign a function return isSent
+        people.Messages.forEach(m => {
             m.isSent = () => m.User.username === username
             
             return m
         })
+
+        self.listMessage = people.Messages
+
+        // self.listMessage = people.Messages.map(m => {
+        //     m.isSent = () => m.User.username === username
+            
+        //     return m
+        // })
 
         self.curConversationId = people.id
     }
