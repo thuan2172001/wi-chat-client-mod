@@ -38,9 +38,13 @@ function controller(api, auth, io) {
 
     self.sendMessageSuccess = function(data) {
         //console.log({'self.listMessage': self.listMessage})
-        //console.log({data})
+        console.log({data})
         data.isSent = () => data.User.username === username
-        self.listMessage.push(data)
+        // self.listMessage.push(data)
+
+        const receivMsgConver = findInArr(self.listPeople, msg => msg.Messages[0].idConversation === data.idConversation)
+        console.log({receivMsgConver})
+        receivMsgConver.Messages.push(data)
     }
 
     function preProcess() {
@@ -79,6 +83,15 @@ function controller(api, auth, io) {
                 idConversation: c
             })
         })
+    }
+
+    function findInArr(arr, predicate) {
+        console.log({arr})
+        for (let i of arr) {
+            if(predicate(i)) return i
+        }
+
+        return null
     }
 
 }
