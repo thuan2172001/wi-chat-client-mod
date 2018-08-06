@@ -39,13 +39,13 @@ function controller($sce) {
 
     function preProcess() {
         self.text = replaceText(self.text)  ;
-        // console.log({'self.text': self.text})
+        // //console.log({'self.text': self.text})
     }
 
 
     //change str -> regexable str
     function preRegex(str) {
-        //console.log({str})
+        ////console.log({str})
         return str
             .split('') //to list char
             .reduce((pre, cur) => `${pre}\\${cur}`, ''); //to string with \ attach to each char
@@ -63,14 +63,14 @@ function controller($sce) {
                 const curIcons = cur[1]["text-replace"];
 
 
-                // //console.log({pre, cur, curIcons});
+                // ////console.log({pre, cur, curIcons});
 
                 return [...pre, ...curIcons];
             }, [])
-        //console.log({listIcon});
+        ////console.log({listIcon});
         const regexStr = listIcon
             .reduce((pre, cur, i) => {
-                // //console.log({pre, cur, i})
+                // ////console.log({pre, cur, i})
                 const cur_regex_str = preRegex(cur);
 
                 if (i === 0) return pre + cur_regex_str;
@@ -85,7 +85,7 @@ function controller($sce) {
 
         // const regexStr = listIcon
         //     .reduce((pre, cur, i) => {
-        //         // //console.log({pre, cur, i})
+        //         // ////console.log({pre, cur, i})
         //         const cur_regex_str = `(${preRegex(cur)})`;
 
         //         if (i === 0) return pre + cur_regex_str;
@@ -98,7 +98,7 @@ function controller($sce) {
 
         //     }, '(')
 
-        //console.log({regexStr});
+        ////console.log({regexStr});
         return new RegExp(regexStr, 'g');
 
     }
@@ -112,22 +112,22 @@ function controller($sce) {
     // }
 
     function findIcon(text) {
-        //console.log('===findIcon==');
+        ////console.log('===findIcon==');
         
         const obj = rules
             .filter(o => {
                 const listIcons = o[1]["text-replace"];
-                // //console.log({'o[1][text-replace]': o[1]["text-replace"]});
+                // ////console.log({'o[1][text-replace]': o[1]["text-replace"]});
 
                 return !!listIcons.filter(i => i === text).length;
             })[0]
 
-        // //console.log({text});
-        // //console.log({rules});
-        //console.log('obj');
-        //console.log();
+        // ////console.log({text});
+        // ////console.log({rules});
+        ////console.log('obj');
+        ////console.log();
 
-        //console.log('XXXX findIcon XXXX');
+        ////console.log('XXXX findIcon XXXX');
 
         if (obj) return obj[1].icon;
         return null;
@@ -136,17 +136,17 @@ function controller($sce) {
     //without html
     // function replaceText(str) {
     //     const listIconsVerbose = str.match(regex);
-    //     //console.log({listIconsVerbose});
+    //     ////console.log({listIconsVerbose});
     //     //remove duplicate
     //     const listIcons = listIconsVerbose.filter((val, i) => listIconsVerbose.indexOf(val) === i);
 
-    //     //console.log({listIcons});
+    //     ////console.log({listIcons});
 
     //     let result = str;
     //     for (let icon of listIcons) {
     //         const _regex = new RegExp(preRegex(icon));
     //         const replaceIcon = findIcon(icon);
-    //         //console.log({replaceIcon});
+    //         ////console.log({replaceIcon});
     //         if(replaceIcon) result = result.replace(_regex, replaceIcon);
     //     }
 
@@ -157,20 +157,20 @@ function controller($sce) {
         if(!str) return str
 
         const listIconsVerbose = str.match(regex);
-        //console.log({listIconsVerbose});
+        ////console.log({listIconsVerbose});
         //remove duplicate
         if(!listIconsVerbose || !listIconsVerbose.length) return str;
         
         const listIcons = listIconsVerbose.filter((val, i) => listIconsVerbose.indexOf(val) === i);
 
-        //console.log({listIcons});
+        ////console.log({listIcons});
 
         let result = str;
         for (let icon of listIcons) {
             const _regex = new RegExp(preRegex(icon));
             const replaceIcon = findIcon(icon);
             const iconHtml = toHtmlWithIcon(replaceIcon);
-            //console.log({replaceIcon});
+            ////console.log({replaceIcon});
             if(replaceIcon) result = result.replace(_regex, iconHtml);
         }
 

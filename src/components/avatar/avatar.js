@@ -37,7 +37,7 @@ function controller($rootScope) {
     // function genAvatar() {
     //     const el = document.getElementById(self.genUniqueId())
     //     if(el) el.src = LetterAvatar(self.userName, self.width)
-    //     console.log({LetterAvatar:LetterAvatar(self.userName, self.width)})
+    //     //console.log({LetterAvatar:LetterAvatar(self.userName, self.width)})
     // }
 
     //class
@@ -72,14 +72,14 @@ function controller($rootScope) {
         // colourIndex = Math.random() % colours.length
         // colourIndex = randomInt() % colours.length
         colourIndex = strToNum(self.userName) % colours.length
-        // console.log({colourIndex})
+        // //console.log({colourIndex})
         canvas        = d.createElement('canvas');
         canvas.width  = size;
         canvas.height = size;
         context       = canvas.getContext("2d");
          
         context.fillStyle = colours[colourIndex];
-        // console.log({'context-fils':colours[colourIndex]})
+        // //console.log({'context-fils':colours[colourIndex]})
         context.fillRect (0, 0, canvas.width, canvas.height);
         context.font = Math.round(canvas.width/2)+"px Arial";
         context.textAlign = "center";

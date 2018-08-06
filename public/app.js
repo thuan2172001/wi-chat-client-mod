@@ -6559,8 +6559,8 @@ if(prevEntry)prevEntry.n=nextEntry;//n stands for next, 'next' didn't minify
       bindToController: true,
       controller: function() {
         this.$onInit = function() {
-          console.log(this.hasOwnProperty('notoptional')) // true
-          console.log(this.hasOwnProperty('optional')) // false
+          //console.log(this.hasOwnProperty('notoptional')) // true
+          //console.log(this.hasOwnProperty('optional')) // false
         }
       }
     }
@@ -7019,14 +7019,14 @@ if(prevEntry)prevEntry.n=nextEntry;//n stands for next, 'next' didn't minify
  * ```js
  * function linkingFn(scope, elm, attrs, ctrl) {
  *   // get the attribute value
- *   console.log(attrs.ngModel);
+ *   //console.log(attrs.ngModel);
  *
  *   // change the attribute
  *   attrs.$set('ngModel', 'new value');
  *
  *   // observe changes to interpolated attribute
  *   attrs.$observe('ngModel', function(value) {
- *     console.log('ngModel has changed value to ' + value);
+ *     //console.log('ngModel has changed value to ' + value);
  *   });
  * }
  * ```
@@ -10020,7 +10020,7 @@ var formatStackTrace=msie||/\bEdge\//.test($window.navigator&&$window.navigator.
        *
        * @description
        * Write a debug message
-       */debug:function(){var fn=consoleLog('debug');return function(){if(debug){fn.apply(self,arguments);}};}()};function formatError(arg){if(isError(arg)){if(arg.stack&&formatStackTrace){arg=arg.message&&arg.stack.indexOf(arg.message)===-1?'Error: '+arg.message+'\n'+arg.stack:arg.stack;}else if(arg.sourceURL){arg=arg.message+'\n'+arg.sourceURL+':'+arg.line;}}return arg;}function consoleLog(type){var console=$window.console||{},logFn=console[type]||console.log||noop;return function(){var args=[];forEach(arguments,function(arg){args.push(formatError(arg));});// Support: IE 9 only
+       */debug:function(){var fn=consoleLog('debug');return function(){if(debug){fn.apply(self,arguments);}};}()};function formatError(arg){if(isError(arg)){if(arg.stack&&formatStackTrace){arg=arg.message&&arg.stack.indexOf(arg.message)===-1?'Error: '+arg.message+'\n'+arg.stack:arg.stack;}else if(arg.sourceURL){arg=arg.message+'\n'+arg.sourceURL+':'+arg.line;}}return arg;}function consoleLog(type){var console=$window.console||{},logFn=console[type]||//console.log||noop;return function(){var args=[];forEach(arguments,function(arg){args.push(formatError(arg));});// Support: IE 9 only
 // console methods don't inherit from Function.prototype in IE 9 so we can't
 // call `logFn.apply(console, args)` directly.
 return Function.prototype.apply.call(logFn,console,args);};}}];}/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -17081,7 +17081,7 @@ function arrayDifference(tokens1,tokens2){if(!tokens1||!tokens1.length)return[];
         getAndClearSevereErrors().then(function(filteredLog) {
           expect(filteredLog.length).toEqual(0);
           if (filteredLog.length) {
-            console.log('browser console errors: ' + util.inspect(filteredLog));
+            //console.log('browser console errors: ' + util.inspect(filteredLog));
           }
         });
       }
@@ -22080,7 +22080,7 @@ return ctrl.$isEmpty(viewValue)||isUndefined(regexp)||regexp.test(viewValue);};}
  *   </file>
  * </example>
  */var minlengthDirective=function minlengthDirective(){return{restrict:'A',require:'?ngModel',link:function link(scope,elm,attr,ctrl){if(!ctrl)return;var minlength=0;attr.$observe('minlength',function(value){minlength=toInt(value)||0;ctrl.$validate();});ctrl.$validators.minlength=function(modelValue,viewValue){return ctrl.$isEmpty(viewValue)||viewValue.length>=minlength;};}};};if(window.angular.bootstrap){// AngularJS is already loaded, so we can return here...
-if(window.console){console.log('WARNING: Tried to load AngularJS more than once.');}return;}// try to bind to jquery now so that one can write jqLite(fn)
+if(window.console){//console.log('WARNING: Tried to load AngularJS more than once.');}return;}// try to bind to jquery now so that one can write jqLite(fn)
 // but we will rebind on bootstrap again.
 bindJQuery();publishExternalAPI(angular);angular.module("ngLocale",[],["$provide",function($provide){var PLURAL_CATEGORY={ZERO:"zero",ONE:"one",TWO:"two",FEW:"few",MANY:"many",OTHER:"other"};function getDecimals(n){n=n+'';var i=n.indexOf('.');return i==-1?0:n.length-i-1;}function getVF(n,opt_precision){var v=opt_precision;if(undefined===v){v=Math.min(getDecimals(n),3);}var base=Math.pow(10,v);var f=(n*base|0)%base;return{v:v,f:f};}$provide.value("$locale",{"DATETIME_FORMATS":{"AMPMS":["AM","PM"],"DAY":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"ERANAMES":["Before Christ","Anno Domini"],"ERAS":["BC","AD"],"FIRSTDAYOFWEEK":6,"MONTH":["January","February","March","April","May","June","July","August","September","October","November","December"],"SHORTDAY":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"SHORTMONTH":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"STANDALONEMONTH":["January","February","March","April","May","June","July","August","September","October","November","December"],"WEEKENDRANGE":[5,6],"fullDate":"EEEE, MMMM d, y","longDate":"MMMM d, y","medium":"MMM d, y h:mm:ss a","mediumDate":"MMM d, y","mediumTime":"h:mm:ss a","short":"M/d/yy h:mm a","shortDate":"M/d/yy","shortTime":"h:mm a"},"NUMBER_FORMATS":{"CURRENCY_SYM":"$","DECIMAL_SEP":".","GROUP_SEP":",","PATTERNS":[{"gSize":3,"lgSize":3,"maxFrac":3,"minFrac":0,"minInt":1,"negPre":"-","negSuf":"","posPre":"","posSuf":""},{"gSize":3,"lgSize":3,"maxFrac":2,"minFrac":2,"minInt":1,"negPre":'-\xA4',"negSuf":"","posPre":'\xA4',"posSuf":""}]},"id":"en-us","localeID":"en_US","pluralCat":function pluralCat(n,opt_precision){var i=n|0;var vf=getVF(n,opt_precision);if(i==1&&vf.v==0){return PLURAL_CATEGORY.ONE;}return PLURAL_CATEGORY.OTHER;}});}]);jqLite(function(){angularInit(window.document,bootstrap);});})(window);!window.angular.$$csp().noInlineStyle&&window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
@@ -36139,7 +36139,7 @@ ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize
       // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
       var base64test = /[^A-Za-z0-9\+\/\=]/g;
       if (base64test.exec(input)) {
-        console.log('There were invalid base64 characters in the input text.\n' + 'Valid base64 characters are A-Z, a-z, 0-9, ' + ', ' / ',and "="\n' + 'Expect errors in decoding.');
+        //console.log('There were invalid base64 characters in the input text.\n' + 'Valid base64 characters are A-Z, a-z, 0-9, ' + ', ' / ',and "="\n' + 'Expect errors in decoding.');
       }
       input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
 
@@ -39543,12 +39543,12 @@ function controller($sce) {
 
     function preProcess() {
         self.text = $sce.trustAsHtml(replaceText(self.text));
-        // console.log({'self.text': self.text})
+        // //console.log({'self.text': self.text})
     }
 
     //change str -> regexable str
     function preRegex(str) {
-        //console.log({str})
+        ////console.log({str})
         return str.split('') //to list char
         .reduce(function (pre, cur) {
             return pre + '\\' + cur;
@@ -39565,13 +39565,13 @@ function controller($sce) {
             // const preIcons = pre[1]["text-replace"];
             var curIcons = cur[1]["text-replace"];
 
-            // //console.log({pre, cur, curIcons});
+            // ////console.log({pre, cur, curIcons});
 
             return [].concat(_toConsumableArray(pre), _toConsumableArray(curIcons));
         }, []);
-        //console.log({listIcon});
+        ////console.log({listIcon});
         var regexStr = listIcon.reduce(function (pre, cur, i) {
-            // //console.log({pre, cur, i})
+            // ////console.log({pre, cur, i})
             var cur_regex_str = preRegex(cur);
 
             if (i === 0) return pre + cur_regex_str;
@@ -39585,7 +39585,7 @@ function controller($sce) {
 
         // const regexStr = listIcon
         //     .reduce((pre, cur, i) => {
-        //         // //console.log({pre, cur, i})
+        //         // ////console.log({pre, cur, i})
         //         const cur_regex_str = `(${preRegex(cur)})`;
 
         //         if (i === 0) return pre + cur_regex_str;
@@ -39598,7 +39598,7 @@ function controller($sce) {
 
         //     }, '(')
 
-        //console.log({regexStr});
+        ////console.log({regexStr});
         return new RegExp(regexStr, 'g');
     }
 
@@ -39611,23 +39611,23 @@ function controller($sce) {
     // }
 
     function findIcon(text) {
-        //console.log('===findIcon==');
+        ////console.log('===findIcon==');
 
         var obj = rules.filter(function (o) {
             var listIcons = o[1]["text-replace"];
-            // //console.log({'o[1][text-replace]': o[1]["text-replace"]});
+            // ////console.log({'o[1][text-replace]': o[1]["text-replace"]});
 
             return !!listIcons.filter(function (i) {
                 return i === text;
             }).length;
         })[0];
 
-        // //console.log({text});
-        // //console.log({rules});
-        //console.log('obj');
-        //console.log();
+        // ////console.log({text});
+        // ////console.log({rules});
+        ////console.log('obj');
+        ////console.log();
 
-        //console.log('XXXX findIcon XXXX');
+        ////console.log('XXXX findIcon XXXX');
 
         if (obj) return obj[1].icon;
         return null;
@@ -39636,17 +39636,17 @@ function controller($sce) {
     //without html
     // function replaceText(str) {
     //     const listIconsVerbose = str.match(regex);
-    //     //console.log({listIconsVerbose});
+    //     ////console.log({listIconsVerbose});
     //     //remove duplicate
     //     const listIcons = listIconsVerbose.filter((val, i) => listIconsVerbose.indexOf(val) === i);
 
-    //     //console.log({listIcons});
+    //     ////console.log({listIcons});
 
     //     let result = str;
     //     for (let icon of listIcons) {
     //         const _regex = new RegExp(preRegex(icon));
     //         const replaceIcon = findIcon(icon);
-    //         //console.log({replaceIcon});
+    //         ////console.log({replaceIcon});
     //         if(replaceIcon) result = result.replace(_regex, replaceIcon);
     //     }
 
@@ -39655,7 +39655,7 @@ function controller($sce) {
 
     function replaceText(str) {
         var listIconsVerbose = str.match(regex);
-        //console.log({listIconsVerbose});
+        ////console.log({listIconsVerbose});
         //remove duplicate
         if (!listIconsVerbose || !listIconsVerbose.length) return str;
 
@@ -39663,7 +39663,7 @@ function controller($sce) {
             return listIconsVerbose.indexOf(val) === i;
         });
 
-        //console.log({listIcons});
+        ////console.log({listIcons});
 
         var result = str;
         var _iteratorNormalCompletion = true;
@@ -39677,7 +39677,7 @@ function controller($sce) {
                 var _regex = new RegExp(preRegex(icon));
                 var replaceIcon = findIcon(icon);
                 var iconHtml = toHtmlWithIcon(replaceIcon);
-                //console.log({replaceIcon});
+                ////console.log({replaceIcon});
                 if (replaceIcon) result = result.replace(_regex, iconHtml);
             }
         } catch (err) {
@@ -39839,17 +39839,17 @@ function controller() {
 
     self.$onInit = function () {
 
-        // console.log('inside');
+        // //console.log('inside');
         // const modal = $element.find('modal');
         // const img = $element.find('.main-img');
         // const modalImg = $element.find('.modal-content');
 
 
-        // console.log(self.source);
-        // // console.log('img-preview');
-        // console.log({modal});
-        // console.log({img});
-        // console.log({modalImg});
+        // //console.log(self.source);
+        // // //console.log('img-preview');
+        // //console.log({modal});
+        // //console.log({img});
+        // //console.log({modalImg});
         preProcess();
         // enableZoom(self.zoomRate);
 
@@ -39872,12 +39872,12 @@ function controller() {
         var modal = document.getElementById(self._modal);
 
         modal.style.display = 'none';
-        // console.log('img click');
-        // console.log({modal});
+        // //console.log('img click');
+        // //console.log({modal});
     };
 
     self.zoomByMouseToggle = function () {
-        console.log({ 'self.zoomer.isZoomHoverEnable': self.zoomer.isZoomHoverEnable() });
+        //console.log({ 'self.zoomer.isZoomHoverEnable': self.zoomer.isZoomHoverEnable() });
         if (!self.zoomer.isZoomHoverEnable()) {
             //zoom hover
             self.zoomer.enableZoom();
@@ -39899,7 +39899,7 @@ function controller() {
 
     // self.downloadOnClick = function () {
     //     // self.downloadFunc(self.source);
-    //     // console.log('download');
+    //     // //console.log('download');
 
     //     // const a = document.createElement('a');
     //     // a.download = true;
@@ -39911,7 +39911,7 @@ function controller() {
 
     //     // a.click();
 
-    //     console.log(self.downloadFunc());
+    //     //console.log(self.downloadFunc());
     // }
 
 
@@ -39926,8 +39926,8 @@ function controller() {
         // img = document.getElementById(self._img);
 
 
-        // console.log(modal);
-        // console.log(modalImg);
+        // //console.log(modal);
+        // //console.log(modalImg);
         // closeBtn = document.getElementById(self._closeBtn);
 
         // self.zoomRate = 100;
@@ -39972,7 +39972,7 @@ function controller() {
         var zoomRate = 1;
 
         background.style.backgroundImage = 'url(\'' + self.fullImgLink + '\')';
-        console.log({ 'self.fullIMGLinkd': self.fullImgLink });
+        //console.log({ 'self.fullIMGLinkd': self.fullImgLink });
         function enableZoom() {
             background.onmousemove = function (e) {
                 var zoomer = e.currentTarget;
@@ -40358,9 +40358,9 @@ function controller(api, auth) {
 
                 return people;
             });
-            // console.log({'self.listPeople' : self.listPeople})
+            // //console.log({'self.listPeople' : self.listPeople})
         });
-        // console.log(auth.getData())
+        // //console.log(auth.getData())
     }
 }
 
@@ -40683,7 +40683,7 @@ function controller(auth) {
                 password = self.password;
 
             var data = { username: username, password: password };
-            console.log({ data: data });
+            //console.log({ data: data });
             auth.loginSubmit(data, function (token) {
                 if (!token) self.errorMesg = 'wrong username or password';else preProcess();
             });
@@ -40953,7 +40953,7 @@ function service($rootScope, $http) {
             } else {
                 var token = response.data.content.token;
 
-                console.log({ token: token });
+                //console.log({ token: token });
                 loginSuccess(token);
                 cb(token);
             }

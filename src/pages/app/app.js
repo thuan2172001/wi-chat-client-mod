@@ -37,8 +37,8 @@ function controller(api, auth, io) {
     }
 
     self.sendMessageSuccess = function(data) {
-        console.log({'self.listMessage': self.listMessage})
-        console.log({data})
+        //console.log({'self.listMessage': self.listMessage})
+        //console.log({data})
         data.isSent = () => data.User.username === username
         self.listMessage.push(data)
     }
@@ -49,7 +49,7 @@ function controller(api, auth, io) {
         self.thisUser = thisUser
         self.curConversationId = -1
 
-        console.log(auth.getThisUser())
+        //console.log(auth.getThisUser())
     }
     
 
@@ -59,7 +59,7 @@ function controller(api, auth, io) {
         api.getListConversation(token, {username}, (resp) => {
             self.listPeople = resp.list
                 .filter(p => p.Messages.length)
-            // console.log({'self.listPeople' : self.listPeople})
+            // //console.log({'self.listPeople' : self.listPeople})
 
             io.connect()
             io.onConnect(() => {
@@ -71,8 +71,8 @@ function controller(api, auth, io) {
     }
 
     function joinAllRoom(listConver) {
-        console.log({listConver})
-        console.log({username})
+        //console.log({listConver})
+        //console.log({username})
         listConver.forEach(c => {
             io.joinRoom({
                 username,

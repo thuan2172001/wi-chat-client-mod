@@ -14,7 +14,7 @@ function service($timeout, $rootScope) {
     function connect() {
         socket = io(ROOT)
         socket.on('connect', () => {
-            console.log('socket is connected')
+            //console.log('socket is connected')
             $rootScope.$emit(SOCKET_CONNECT)
         })
     }
@@ -27,9 +27,9 @@ function service($timeout, $rootScope) {
 
     function onSendMessage(cb) {
         socket.on(SEND_MESSAGE, function(data) {
-            console.log('send')
+            //console.log('send')
             $timeout(function() {
-                // console.log(data);
+                // //console.log(data);
                 // self.listConver.filter(function(conver) { return conver.id==data.idConversation; })[0].Messages.push(data);
                 // $timeout(function(){
                 //     listMessage.scrollTop(listMessage[0].scrollHeight);
@@ -40,7 +40,7 @@ function service($timeout, $rootScope) {
     }
 
     function joinRoom(data) {
-        console.log('join room')
+        //console.log('join room')
         socket.emit(JOIN_ROOM, data)
     }
 

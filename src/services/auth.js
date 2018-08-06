@@ -30,7 +30,7 @@ function service($rootScope, $http) {
                 cb();
             } else {
                 const {token, user} = response.data.content
-                //console.log({token})
+                ////console.log({token})
                 loginSuccess(token, user);
                 cb(token);
 

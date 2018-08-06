@@ -16,7 +16,7 @@ function controller($sce) {
     }
 
     self.$onChanges = function(obj) {
-        // console.log({obj})
+        // //console.log({obj})
         if(obj.type && obj.type.currentValue) self.type = obj.type.currentValue
         preProcess()
     }
@@ -36,14 +36,14 @@ function controller($sce) {
 
 
     // //     let start = MAX_STR_LENGTH - 1
-    // //     // console.log({str})
+    // //     // //console.log({str})
     // //     while (start < str.length) {
 
     // //         if (isAlphabetOrDigit(str[start]) || (!isAlphabetOrDigit(str[start]) && isAlphabetOrDigit(str[start + 1]))) {
 
     // //             const before = str.substring(0, start)
     // //             const after = str.substring(start, str.length)
-    // //             // console.log({before, after})
+    // //             // //console.log({before, after})
     // //             str = before + br + after
     // //             start += MAX_STR_LENGTH + br.length
     // //         } else {

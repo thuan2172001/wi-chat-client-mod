@@ -13,7 +13,7 @@ function controller(auth) {
 
     const lengthUrl = ROOT.length
     const token = auth.getToken()
-    // self.$onInit = function() {console.log(self.type)}
+    // self.$onInit = function() {//console.log(self.type)}
 
     self.isImage = () => self.type === IMG
     self.isText = () => self.type === TEXT

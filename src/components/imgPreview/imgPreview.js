@@ -14,17 +14,17 @@ function controller() {
     self.$onInit = function () {
 
 
-        // console.log('inside');
+        // //console.log('inside');
         // const modal = $element.find('modal');
         // const img = $element.find('.main-img');
         // const modalImg = $element.find('.modal-content');
 
 
-        // console.log(self.source);
-        // // console.log('img-preview');
-        // console.log({modal});
-        // console.log({img});
-        // console.log({modalImg});
+        // //console.log(self.source);
+        // // //console.log('img-preview');
+        // //console.log({modal});
+        // //console.log({img});
+        // //console.log({modalImg});
         preProcess();
         // enableZoom(self.zoomRate);
         
@@ -49,12 +49,12 @@ function controller() {
         const modal = document.getElementById(self._modal);
 
         modal.style.display = 'none';
-        // console.log('img click');
-        // console.log({modal});
+        // //console.log('img click');
+        // //console.log({modal});
     }
 
     self.zoomByMouseToggle = function () {
-        console.log({'self.zoomer.isZoomHoverEnable':self.zoomer.isZoomHoverEnable()});
+        //console.log({'self.zoomer.isZoomHoverEnable':self.zoomer.isZoomHoverEnable()});
         if (!self.zoomer.isZoomHoverEnable()) {
             //zoom hover
             self.zoomer.enableZoom();
@@ -76,7 +76,7 @@ function controller() {
 
     // self.downloadOnClick = function () {
     //     // self.downloadFunc(self.source);
-    //     // console.log('download');
+    //     // //console.log('download');
 
     //     // const a = document.createElement('a');
     //     // a.download = true;
@@ -88,7 +88,7 @@ function controller() {
 
     //     // a.click();
 
-    //     console.log(self.downloadFunc());
+    //     //console.log(self.downloadFunc());
     // }
 
 
@@ -103,8 +103,8 @@ function controller() {
         // img = document.getElementById(self._img);
 
 
-        // console.log(modal);
-        // console.log(modalImg);
+        // //console.log(modal);
+        // //console.log(modalImg);
         // closeBtn = document.getElementById(self._closeBtn);
 
         // self.zoomRate = 100;
@@ -147,7 +147,7 @@ function controller() {
         let zoomRate = 1;
 
         background.style.backgroundImage = `url('${self.fullImgLink}')`;
-        console.log({'self.fullIMGLinkd': self.fullImgLink});
+        //console.log({'self.fullIMGLinkd': self.fullImgLink});
         function enableZoom() {
             background.onmousemove = function (e) {
                 const zoomer = e.currentTarget;
