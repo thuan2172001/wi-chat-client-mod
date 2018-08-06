@@ -45,7 +45,7 @@ function controller(api, auth, io) {
         const receivMsgConver = findInArr(self.listPeople, msg => msg.Messages[0].idConversation === data.idConversation)
         console.log({receivMsgConver})
         if(receivMsgConver) receivMsgConver.Messages.push(data)
-        else init()
+        else setTimeout(() => init(), 2000)
         sortPeopleByLatestMsg()
     }
 

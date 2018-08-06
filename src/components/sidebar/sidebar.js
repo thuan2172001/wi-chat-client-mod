@@ -1,5 +1,5 @@
 import template from './sidebar.html'
-// import './sidebar.css'
+import './sidebar.scss'
 
 const name = 'sidebar'
 
@@ -18,6 +18,7 @@ function controller(api, auth) {
     }
 
     self._chooseConversation = function(people) {
+        // api.seenMessage({}, auth.getToken(), ())
         self.chooseConversation(people)
         self.listPeople = self.listPeople.map(p => {
             if(p.name === people.name) p.isChosen = true
