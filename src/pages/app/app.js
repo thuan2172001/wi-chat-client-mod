@@ -44,7 +44,9 @@ function controller(api, auth, io) {
 
         const receivMsgConver = findInArr(self.listPeople, msg => msg.Messages[0].idConversation === data.idConversation)
         console.log({receivMsgConver})
-        receivMsgConver.Messages.push(data)
+        if(receivMsgConver) receivMsgConver.Messages.push(data)
+        else init()
+        sortPeopleByLatestMsg()
     }
 
     function preProcess() {
@@ -69,6 +71,8 @@ function controller(api, auth, io) {
             io.onConnect(() => {
                 joinAllRoom(resp.list.map(el => el.id))
             })
+
+            sortPeopleByLatestMsg()
         })
 
         
@@ -92,6 +96,17 @@ function controller(api, auth, io) {
         }
 
         return null
+    }
+
+
+    //use after filter people with message
+    function sortPeopleByLatestMsg() {
+        self.listPeople.sort((a, b) => {
+            const lastMsgSendAtA = a.Messages[a.Messages.length - 1]
+            const lastMsgSendAtB = b.Messages[b.Messages.length - 1]
+
+            return  new Date(lastMsgSendAtB.sendAt) - new Date(lastMsgSendAtA.sendAt) 
+        })
     }
 
 }
