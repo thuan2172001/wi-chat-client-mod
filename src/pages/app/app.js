@@ -24,9 +24,9 @@ function controller(api, auth, io) {
             
             return m
         })
-
+        
         self.listMessage = people.Messages
-
+        
         // self.listMessage = people.Messages.map(m => {
         //     m.isSent = () => m.User.username === username
             
@@ -34,6 +34,7 @@ function controller(api, auth, io) {
         // })
 
         self.curConversationId = people.id
+        seenMsg(people)
     }
 
     self.sendMessageSuccess = function(data) {
@@ -54,6 +55,7 @@ function controller(api, auth, io) {
         self.listMessage= []
         self.thisUser = thisUser
         self.curConversationId = -1
+        self.unseenMesgNum = -1
 
         //console.log(auth.getThisUser())
     }
@@ -65,7 +67,12 @@ function controller(api, auth, io) {
         api.getListConversation(token, {username}, (resp) => {
             self.listPeople = resp.list
                 .filter(p => p.Messages.length)
+                .map(p => {
+                    p.isSeenMsgFrom = !(p.lastMessFontWeight)
+                    return p
+                })
             // //console.log({'self.listPeople' : self.listPeople})
+            self.unseenMesgNum = resp.numNewMess
 
             io.connect()
             io.onConnect(() => {
@@ -107,6 +114,27 @@ function controller(api, auth, io) {
 
             return  new Date(lastMsgSendAtB.sendAt) - new Date(lastMsgSendAtA.sendAt) 
         })
+    }
+
+    function seenMsg(people) {
+        console.log({"self.unseenMesgNum" :self.unseenMesgNum})
+        if(!people.isSeenMsgFrom && self.unseenMesgNum > 0) {
+            self.unseenMesgNum = self.unseenMesgNum -1
+            people.isSeenMsgFrom = true
+
+            console.log(people.Messages[0].User.id)
+            console.log(people.name)
+            console.log({token: auth.getToken()})
+            api.seenMessage({
+                idUser:auth.getThisUser().id,
+                nameConversation: people.name
+            }, auth.getToken(), (resp) => {
+                
+                console.log('seen msg')
+                if(!resp) console.log('err')
+                else console.log(resp)
+            })
+        }
     }
 
 }

@@ -5,7 +5,7 @@
                 <h4>Recent
                     <span class="button">
                         <i class="fa fa-comments"></i>
-                        <span class="button__badge">4</span>
+                        <span class="button__badge" ng-bind="self.unseenMessNum"></span>
                     </span>
                 </h4>
                 
@@ -29,6 +29,7 @@
              latest-mesg="people.getLatestMsg().content"
              time="people.getLatestMsg().sendAt"
              ng-click="self._chooseConversation(people)"
+             is-seen-yet="people.isSeenMsgFrom"
              >
             </inbox-people>
             

@@ -13,8 +13,10 @@ function controller(api, auth) {
     }
 
     self.$onChanges = function({listPeople}) {
-        self.listPeople = listPeople.currentValue
-        preProcess()
+        if(listPeople) {
+            self.listPeople = listPeople.currentValue
+            preProcess()
+        }
     }
 
     self._chooseConversation = function(people) {
@@ -52,7 +54,8 @@ export default {
     options: {
         bindings: {
             listPeople: '<',
-            chooseConversation: '<'
+            chooseConversation: '<',
+            unseenMessNum: '<'
         },
         template,
         controller,
