@@ -55,7 +55,7 @@ function controller(api, auth, io) {
         self.listMessage= []
         self.thisUser = thisUser
         self.curConversationId = -1
-        self.unseenMesgNum = -1
+        self.unseenMesgNum = 0
 
         //console.log(auth.getThisUser())
     }

@@ -28,6 +28,8 @@ function controller(auth, api, io) {
                 scroll()
             })
         })
+
+        enableEnterSubmit()
     }
 
     self.$onChanges = function ({ listMessage, curConverId, thisUser }) {
@@ -99,6 +101,21 @@ function controller(auth, api, io) {
 
     function checkSubmit(cb) {
         if (self.text) cb()
+    }
+
+    function enableEnterSubmit() {
+
+        document.querySelector('textarea').addEventListener('keydown', function(e) {
+            if(e.keyCode === 13 && !e.shiftKey) e.preventDefault()
+        })
+
+        document.querySelector('.mesgs').addEventListener('keyup', function(e) {
+            const submitBtn = document.querySelector('.msg_send_btn')
+            e.preventDefault()
+            if(e.keyCode === 13) {
+                if(!e.shiftKey) submitBtn.click()
+            }
+        })
     }
 }
 
