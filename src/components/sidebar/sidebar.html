@@ -5,7 +5,8 @@
                 <h4>Recent
                     <span class="button">
                         <i class="fa fa-comments"></i>
-                        <span class="button__badge" ng-bind="self.unseenMessNum"></span>
+                        <span ng-if="!self.unseenMessNum" class="button__badge" ng-bind="self.unseenMessNum"></span>
+                        <span ng-if="self.unseenMessNum" class="button__badge" ng-bind="self.unseenMessNum"></span>
                     </span>
                 </h4>
                 
