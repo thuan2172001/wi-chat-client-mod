@@ -68,6 +68,12 @@ function controller(auth, api, io) {
         auth.logout()
     }
 
+    self.showConverName = function() {
+        const prefix = 'Help_Desk-'
+        
+        return self.converName.replace(prefix, '').toUpperCase()
+    }
+
     function preProcess() {
         self.text = ''
     }
@@ -126,7 +132,8 @@ export default {
             listMessage: '<',
             thisUser: '<',
             curConverId: '<',
-            sendMessageSuccess: '<'
+            sendMessageSuccess: '<',
+            converName: '<'
         },
         template,
         controller,

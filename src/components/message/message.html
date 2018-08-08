@@ -8,14 +8,20 @@
                     img-src="self.avatar"
                     user-name="self.userName">
                 </avatar>
+                <span 
+                 class="time_date" 
+                 style="margin: 0 0 0 5px; "
+                 ng-bind="self.userName"></span>
             </div>
             <div class="received_msg">
                 <div class="received_withd_msg">
                     <!-- <p>Test, which is a new approach to have</p> -->
+                    
                     <p ng-class="{'no-backgroud': self.isImage}" class="break-line">
                         <!-- <chat-text 
                          text="self.text">
                         </chat-text> -->
+                        
                         <chat-content 
                          content="self.text"
                          type="self.type">
@@ -31,7 +37,7 @@
     
     <div ng-if="self.isSentMesg">
         <div class="outgoing_msg">
-            <div class="sent_msg">
+            <div class="sent_msg" style="margin-right: 15px;">
                 <p ng-class="{'no-backgroud': self.isImage}" class="break-line">
                     <!-- <chat-text text="self.text"></chat-text> -->
                     <chat-content 

@@ -26,6 +26,8 @@ function controller(api, auth, io) {
         })
         
         self.listMessage = people.Messages
+        self.curConverName = people.name
+        console.log({'self.curConverName': self.curConverName})
         
         // self.listMessage = people.Messages.map(m => {
         //     m.isSent = () => m.User.username === username
@@ -53,6 +55,7 @@ function controller(api, auth, io) {
     function preProcess() {
         self.listPeople = []
         self.listMessage= []
+        self.curConverName = ''
         self.thisUser = thisUser
         self.curConversationId = -1
         self.unseenMesgNum = 0

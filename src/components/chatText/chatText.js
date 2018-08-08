@@ -23,11 +23,17 @@ function controller($sce) {
 
     self.getHtml = () => {
         const rules = [{
-            encode: '&lt',
+            // encode: '&lt',
+            encode: /(\&lt)/g,
             str: '<'
         }, {
-            encode: '&gt',
+            // encode: '&gt',
+            encode: /(\&gt)/g,
             str: '>'
+        }, {
+            // encode: '<br/>',
+            encode: /(\<br\/\>)/g,
+            str: '<br>'
         }]
         let text = self.text || ''
         rules.forEach(r => {

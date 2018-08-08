@@ -34,6 +34,12 @@ function controller(api, auth) {
 
 
     function preProcess() {
+
+        //search
+        self.filterPeople = {
+            name: ''
+        }
+
         self.listPeople = self.listPeople.map((people, i) => {
             // if (i) people.isChosen = true
             // else people.isChosen = false
