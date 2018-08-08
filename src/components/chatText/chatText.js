@@ -21,6 +21,11 @@ function controller($sce) {
         preProcess();
     }
 
+    self.$onChanges = function({text}) {
+        self.text = text.currentValue
+        preProcess()
+    }
+
     self.getHtml = () => {
         const rules = [{
             // encode: '&lt',

@@ -1,0 +1,5 @@
+webpackHotUpdate("main",{"./src/components/inboxPeople/inboxPeople.js":
+/*!***************************************************!*\
+  !*** ./src/components/inboxPeople/inboxPeople.js ***!
+  \***************************************************/
+/*! no static exports found */function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var s,l=o(/*! ./inboxPeople.html */"./src/components/inboxPeople/inboxPeople.html"),n=(s=l)&&s.__esModule?s:{default:s};t.default={name:"inboxPeople",options:{bindings:{isChosen:"<",peopleName:"<",latestMesg:"<",time:"<",isSeenYet:"<"},template:n.default,controller:function(){var e=this;e.showName=function(){return e.peopleName.replace("Help_Desk-","")},e.showMsg=function(){var t=e.latestMesg||"",o=t.lastIndexOf("&ltbr&gt"),s=t.lastIndexOf("&ltbr/&gt"),l=t.lastIndexOf("↵"),n=Math.max(o,s,l);return-1===n&&(n=0),/↵/.test(t)&&console.log({i1:o,i2:s,i:n,str:t.substr(n)}),t.substr(n).replace(new RegExp("(&ltbr&gt|&ltbr/&gt|↵)"),"")}},controllerAs:"self"}}}});

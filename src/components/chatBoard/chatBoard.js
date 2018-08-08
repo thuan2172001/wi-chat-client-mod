@@ -23,7 +23,7 @@ function controller(auth, api, io) {
                 // //console.log({data})
                 // //console.log({'self.listMesg' : self.listMessage})
                 self.sendMessageSuccess(data)
-                console.log({data})
+                //console.log({data})
                 //scroll to bottom
                 scroll()
             })

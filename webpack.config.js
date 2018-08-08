@@ -59,6 +59,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new UglifyJsPlugin({uglifyOptions:{compress:true}}),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin()
   ],
