@@ -17,6 +17,9 @@ function controller() {
         const br1 = '&ltbr&gt'
         const br2 = '&ltbr/&gt'
         const br3 = '\n'
+        const LIMIT_LEN = 45
+
+
         const i1 = text.lastIndexOf(br1)
         const i2 = text.lastIndexOf(br2)
         const i3 = text.lastIndexOf(br3)
@@ -26,9 +29,18 @@ function controller() {
         
         // if(/\n/.test(text)) console.log({i1, i2, i, 'str': text.substr(i)})
         //console.log({text: text.substr(i).replace(new RegExp(`(${br1}|${br2}|${br3})`), '')})
-        return text.substr(i).replace(new RegExp(`(${br1}|${br2}|${br3})`), '')
+        const result = text.substr(i).replace(new RegExp(`(${br1}|${br2}|${br3})`), '')
+        return limitStrLen(result, LIMIT_LEN)
     }
 
+    function limitStrLen(str, len) {
+        const MIN = 3
+        if(len < 3) len = 3
+
+        if(str.length > len) return str.substr(0, len - 3) + '...'
+        
+        return str
+    }
     
 }
 
