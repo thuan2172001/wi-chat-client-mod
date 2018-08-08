@@ -55,11 +55,11 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin()
+      // new UglifyJsPlugin()
     ]
   },
   plugins: [
-    new UglifyJsPlugin({uglifyOptions:{compress:true}}),
+    // new UglifyJsPlugin({uglifyOptions:{compress:true}}),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin()
   ],

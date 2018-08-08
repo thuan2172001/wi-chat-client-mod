@@ -26,13 +26,13 @@ function service ($http, Upload) {
             data: data
         }).then(function successCallback(response) {
                 if (response.data.code != 200) {
-                    console.error(response.data.reason);
+                    //console.error(response.data.reason);
                     cb();
                 } else {
                     cb(response.data.content);
                 }
         }, function errorCallback(response) {
-            console.error(response);
+            //console.error(response);
             // if(toastr) toastr.error(response);
             cb();
         });
@@ -45,13 +45,13 @@ function service ($http, Upload) {
             data: data
         }).then(function successCallback(response) {
             if (response.data.code != 200) {
-                console.error(response.data.reason);
+                //console.error(response.data.reason);
                 cb();
             } else {
                 cb(response.data.content);
             }
         }, function errorCallback(response) {
-            console.error(response);
+            //console.error(response);
             if(toastr) toastr.error(response);
             cb();
         });
@@ -63,13 +63,13 @@ function service ($http, Upload) {
     //         data: data
     //     }).then(function successCallback(response) {
     //         if (response.data.code != 200) {
-    //             console.error(response.data.reason);
+    //             //console.error(response.data.reason);
     //             cb();
     //         } else {
     //             cb(response.data.content);
     //         }
     //     }, function errorCallback(response) {
-    //         console.error(response);
+    //         //console.error(response);
     //         if(toastr) toastr.error(response);
     //         cb();
     //     });
@@ -97,14 +97,14 @@ function service ($http, Upload) {
         }).then(
             (response) => {
                 if (response.data.code != 200) {
-                    console.error(response.data.reason);
+                    //console.error(response.data.reason);
                     cb();
                 } else {
                     cb(response.data.content);
                 }
             },
             (error) => {
-                console.error(error);
+                //console.error(error);
                 cb();
             });
     }

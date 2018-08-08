@@ -12,18 +12,18 @@ function controller(auth, api, io) {
         preProcess()
 
         io.onConnect(() => {
-            io.onSendMessage(data => {
+            io.onSendMessage((data, isSendMsg) => {
 
-                // //console.log('send')
+                // ////console.log('send')
                 // self
                 //     .listMessage
                 //     .filter(function (conver) {
                 //         return conver.id == data.idConversation;
                 //     })[0].Messages.push(data);
-                // //console.log({data})
-                // //console.log({'self.listMesg' : self.listMessage})
+                // ////console.log({data})
+                // ////console.log({'self.listMesg' : self.listMessage})
                 self.sendMessageSuccess(data)
-                //console.log({data})
+                ////console.log({data})
                 //scroll to bottom
                 scroll()
             })
@@ -38,16 +38,16 @@ function controller(auth, api, io) {
         if (thisUser) self.thisUser = thisUser.currentValue
         scroll()
 
-        // //console.log({ listMessage, curConverId, thisUser })
+        // ////console.log({ listMessage, curConverId, thisUser })
 
-        // //console.log(self.listMessage)
-        // //console.log(self.listMessage[0].User.username)
+        // ////console.log(self.listMessage)
+        // ////console.log(self.listMessage[0].User.username)
     }
 
     self.submitText = function () {
         checkSubmit(() => {
             const content = self.text.split('\n').join('<br/>');
-            // //console.log({ content })
+            // ////console.log({ content })
             // const idConversation = self
             let message = {
                 content: preventXSS(content),

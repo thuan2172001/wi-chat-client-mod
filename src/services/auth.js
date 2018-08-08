@@ -26,17 +26,17 @@ function service($rootScope, $http) {
             data: data
         }).then(function successCallback(response) {
             if (response.data.code != 200) {
-                console.error(response.data.reason);
+                //console.error(response.data.reason);
                 cb();
             } else {
                 const {token, user} = response.data.content
-                ////console.log({token})
+                //////console.log({token})
                 loginSuccess(token, user);
                 cb(token);
 
             }
         }, function errorCallback(response) {
-            // console.error(response);
+            // //console.error(response);
             // if(toastr) toastr.error(response);
             cb();
         });

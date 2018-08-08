@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free'
+import 'toastr/build/toastr.min.css'
 
 import 'jquery'
 import 'popper.js'

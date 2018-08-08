@@ -1,3 +1,4 @@
+import toastr from 'toastr'
 import template from './app.html'
 import './app.scss'
 
@@ -14,6 +15,11 @@ function controller(api, auth, io) {
     self.$onInit = function () {
         preProcess()
         init()
+
+
+        io.onNewConversation(() => {
+            init()
+        })
     }
 
     self.chooseConversation = function(people) {
@@ -27,7 +33,7 @@ function controller(api, auth, io) {
         
         self.listMessage = people.Messages
         self.curConverName = people.name
-        console.log({'self.curConverName': self.curConverName})
+        //console.log({'self.curConverName': self.curConverName})
         
         // self.listMessage = people.Messages.map(m => {
         //     m.isSent = () => m.User.username === username
@@ -40,16 +46,21 @@ function controller(api, auth, io) {
     }
 
     self.sendMessageSuccess = function(data) {
-        //console.log({'self.listMessage': self.listMessage})
-        console.log({data})
+        ////console.log({'self.listMessage': self.listMessage})
+        //console.log({data})
         data.isSent = () => data.User.username === username
         // self.listMessage.push(data)
 
         const receivMsgConver = findInArr(self.listPeople, msg => msg.Messages[0].idConversation === data.idConversation)
         console.log({receivMsgConver})
-        if(receivMsgConver) receivMsgConver.Messages.push(data)
-        else setTimeout(() => init(), 2000)
-        sortPeopleByLatestMsg()
+        if(receivMsgConver && receivMsgConver.Messages && receivMsgConver.Messages.length){
+            receivMsgConver.Messages.push(data)
+            sortPeopleByLatestMsg()
+        }
+        else {
+            // toastr.warning('wait a few secs')
+        }
+        
     }
 
     function preProcess() {
@@ -60,7 +71,7 @@ function controller(api, auth, io) {
         self.curConversationId = -1
         self.unseenMesgNum = 0
 
-        //console.log(auth.getThisUser())
+        ////console.log(auth.getThisUser())
     }
     
 
@@ -74,7 +85,7 @@ function controller(api, auth, io) {
                     p.isSeenMsgFrom = !(p.lastMessFontWeight)
                     return p
                 })
-            // //console.log({'self.listPeople' : self.listPeople})
+            // ////console.log({'self.listPeople' : self.listPeople})
             self.unseenMesgNum = resp.numNewMess
 
             io.connect()
@@ -83,14 +94,14 @@ function controller(api, auth, io) {
             })
 
             sortPeopleByLatestMsg()
+            console.log({'listPeople': self.listPeople})
+            console.log({'listMessage': self.listMessage})
         })
-
-        
     }
 
     function joinAllRoom(listConver) {
-        //console.log({listConver})
-        //console.log({username})
+        ////console.log({listConver})
+        ////console.log({username})
         listConver.forEach(c => {
             io.joinRoom({
                 username,
@@ -100,7 +111,7 @@ function controller(api, auth, io) {
     }
 
     function findInArr(arr, predicate) {
-        console.log({arr})
+        //console.log({arr})
         for (let i of arr) {
             if(predicate(i)) return i
         }
@@ -120,20 +131,20 @@ function controller(api, auth, io) {
     }
 
     function seenMsg(people) {
-        console.log({"self.unseenMesgNum" :self.unseenMesgNum})
+        //console.log({"self.unseenMesgNum" :self.unseenMesgNum})
         if(!people.isSeenMsgFrom && self.unseenMesgNum > 0) {
             self.unseenMesgNum = self.unseenMesgNum -1
             people.isSeenMsgFrom = true
 
-            console.log(people.Messages[0].User.id)
-            console.log(people.name)
-            console.log({token: auth.getToken()})
+            //console.log(people.Messages[0].User.id)
+            //console.log(people.name)
+            //console.log({token: auth.getToken()})
             api.seenMessage({
                 idUser:auth.getThisUser().id,
                 nameConversation: people.name
             }, auth.getToken(), (resp) => {
                 
-                console.log('seen msg')
+                //console.log('seen msg')
                 if(!resp) console.log('err')
                 else console.log(resp)
             })

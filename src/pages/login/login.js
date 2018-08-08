@@ -15,7 +15,7 @@ function controller(auth) {
         checkSubmit(() => {
             const {username, password} = self
             const data = {username, password}
-            ////console.log({data})
+            //////console.log({data})
             auth.loginSubmit(data, (token) => {
                 if(!token) self.errorMesg = 'wrong username or password'
                 else preProcess()
