@@ -38,7 +38,7 @@ function service($timeout, $rootScope, auth) {
 
         socket.on(NEW_CONVERSATION, data => {
             // cb(data)
-            // toastr.success('Receive a new message')
+            toastr.success('Receive a new message')
             _emit(NEW_CONVERSATION, data)
         })
     }

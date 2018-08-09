@@ -73,6 +73,43 @@ function controller(auth, api, io, ui) {
         return self.converName.replace(prefix, '').toUpperCase()
     }
 
+    self.upload = function (files) {
+
+        const WIDTH_IMAGE_THUMB = 130
+        const user = auth.getThisUser()
+        const token = auth.getToken()
+        files.forEach((file, i) => {
+            {
+                let type = file.type.substring(0, 5);
+                api.upload({
+                    file: file,
+                    fields: { 'name': self.converName, 'width': WIDTH_IMAGE_THUMB }
+                }, token, (res) => {
+                    if (res) {
+                        console.log(res);
+                        let message = {
+                            content: res,
+                            type: type == 'image' ? 'image' : 'file',
+                            idSender: user.id,
+                            idConversation: self.curConverId,
+                            User: user,
+                            sendAt: new Date((new Date()).getTime())
+                        }
+                        api.postMessage(message, token, (res) => {
+                            // _done();
+                            console.log('success')
+                            console.log({res})
+                        });
+                    } else {
+                        console.log('UPLOAD FAIL');
+                    }
+                })
+            }
+        })
+
+
+    }
+
     function preProcess() {
         self.text = ''
     }

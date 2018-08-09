@@ -24,6 +24,15 @@
                  placeholder="Type a message" 
                  style="width: 100%;height: 105px"
                  ng-model="self.text"></textarea>
+                <button 
+                 class="msg_send_btn" 
+                 type="submit" 
+                 style="margin-right: 35px;background: white; color: #05728f;"
+                 ngf-select="self.upload($files)"
+                 multiple="multiple"
+                 ngf-accept="'image/*'">
+                    <i class="fas fa-paperclip"></i>
+                </button>
                 <button class="msg_send_btn" type="submit" ng-click="self.submitText()">
                     <i class="fas fa-paper-plane"></i>
                 </button>
