@@ -27,22 +27,24 @@ function service($timeout, $rootScope, auth) {
     }
 
     function onSendMessage(cb) {
-        socket.on(SEND_MESSAGE, function (data) {
-            ////console.log('send')
-            $timeout(function () {
-                // ////console.log(data);
-                // self.listConver.filter(function(conver) { return conver.id==data.idConversation; })[0].Messages.push(data);
-                // $timeout(function(){
-                //     listMessage.scrollTop(listMessage[0].scrollHeight);
-                // }, 500);
-                const thisUsr = auth.getThisUser()
-                const isSendMsg = thisUsr.id === data.User.id
-                if (!isSendMsg) toastr.success('Receive a new message')
-                console.log({ data })
-                console.log({ thisUsr })
-                cb(data, isSendMsg)
-            })
-        });
+        onConnect(() => {
+            socket.on(SEND_MESSAGE, function (data) {
+                ////console.log('send')
+                $timeout(function () {
+                    // ////console.log(data);
+                    // self.listConver.filter(function(conver) { return conver.id==data.idConversation; })[0].Messages.push(data);
+                    // $timeout(function(){
+                    //     listMessage.scrollTop(listMessage[0].scrollHeight);
+                    // }, 500);
+                    const thisUsr = auth.getThisUser()
+                    const isSendMsg = thisUsr.id === data.User.id
+                    if (!isSendMsg) toastr.success('Receive a new message')
+                    console.log({ data })
+                    console.log({ thisUsr })
+                    cb(data, isSendMsg)
+                })
+            });
+        })
     }
 
     function joinRoom(data) {
@@ -51,9 +53,11 @@ function service($timeout, $rootScope, auth) {
     }
 
     function onNewConversation(cb) {
-        socket.on(NEW_CONVERSATION, data => {
-            cb(data)
-            // toastr.success('Receive a new message')
+        onConnect(() => {
+            socket.on(NEW_CONVERSATION, data => {
+                cb(data)
+                // toastr.success('Receive a new message')
+            })
         })
     }
 

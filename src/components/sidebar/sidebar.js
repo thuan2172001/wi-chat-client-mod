@@ -3,8 +3,8 @@ import './sidebar.scss'
 
 const name = 'sidebar'
 
-controller.$inject = ['api', 'auth', 'io']
-function controller(api, auth, io) {
+controller.$inject = []
+function controller() {
 
     const self = this
 
@@ -50,6 +50,8 @@ function controller(api, auth, io) {
 
             return people
         })
+
+        
     }
 
 

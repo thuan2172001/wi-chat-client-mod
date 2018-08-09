@@ -11,22 +11,20 @@ function controller(auth, api, io) {
     self.$onInit = function () {
         preProcess()
 
-        io.onConnect(() => {
-            io.onSendMessage((data, isSendMsg) => {
+        io.onSendMessage((data, isSendMsg) => {
 
-                // ////console.log('send')
-                // self
-                //     .listMessage
-                //     .filter(function (conver) {
-                //         return conver.id == data.idConversation;
-                //     })[0].Messages.push(data);
-                // ////console.log({data})
-                // ////console.log({'self.listMesg' : self.listMessage})
-                self.sendMessageSuccess(data)
-                ////console.log({data})
-                //scroll to bottom
-                scroll()
-            })
+            // ////console.log('send')
+            // self
+            //     .listMessage
+            //     .filter(function (conver) {
+            //         return conver.id == data.idConversation;
+            //     })[0].Messages.push(data);
+            // ////console.log({data})
+            // ////console.log({'self.listMesg' : self.listMessage})
+            self.sendMessageSuccess(data)
+            ////console.log({data})
+            //scroll to bottom
+            scroll()
         })
 
         enableEnterSubmit()

@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a1f1859408df6c49a01d";
+/******/ 	var hotCurrentHash = "9054b6f1b4c99002263a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -50032,22 +50032,20 @@ function controller(auth, api, io) {
     self.$onInit = function () {
         preProcess();
 
-        io.onConnect(function () {
-            io.onSendMessage(function (data, isSendMsg) {
+        io.onSendMessage(function (data, isSendMsg) {
 
-                // ////console.log('send')
-                // self
-                //     .listMessage
-                //     .filter(function (conver) {
-                //         return conver.id == data.idConversation;
-                //     })[0].Messages.push(data);
-                // ////console.log({data})
-                // ////console.log({'self.listMesg' : self.listMessage})
-                self.sendMessageSuccess(data);
-                ////console.log({data})
-                //scroll to bottom
-                scroll();
-            });
+            // ////console.log('send')
+            // self
+            //     .listMessage
+            //     .filter(function (conver) {
+            //         return conver.id == data.idConversation;
+            //     })[0].Messages.push(data);
+            // ////console.log({data})
+            // ////console.log({'self.listMesg' : self.listMessage})
+            self.sendMessageSuccess(data);
+            ////console.log({data})
+            //scroll to bottom
+            scroll();
         });
 
         enableEnterSubmit();
@@ -51194,13 +51192,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var name = 'sidebar';
 
-controller.$inject = ['api', 'auth', 'io'];
-function controller(api, auth, io) {
+controller.$inject = ['$rootScope', 'io'];
+function controller($rootScope, io) {
 
     var self = this;
 
     self.$onInit = function () {
         preProcess();
+
+        io.onSendMessage(function (data, isSendMsg) {
+            $rootScope.$digest();
+        });
     };
 
     self.$onChanges = function (_ref) {
@@ -51240,6 +51242,11 @@ function controller(api, auth, io) {
             };
 
             return people;
+        }).sort(function (a, b) {
+            var lastMsgSendAtA = a.Messages[a.Messages.length - 1];
+            var lastMsgSendAtB = b.Messages[b.Messages.length - 1];
+
+            return new Date(lastMsgSendAtB.sendAt) - new Date(lastMsgSendAtA.sendAt);
         });
     }
 }
@@ -51655,6 +51662,8 @@ function controller(api, auth, io) {
 
             return new Date(lastMsgSendAtB.sendAt) - new Date(lastMsgSendAtA.sendAt);
         });
+
+        console.log({ 'self.listPeople': self.listPeople });
     }
 
     function seenMsg(people) {
@@ -52255,20 +52264,22 @@ function service($timeout, $rootScope, auth) {
     }
 
     function onSendMessage(cb) {
-        socket.on(_socketEvent.SEND_MESSAGE, function (data) {
-            ////console.log('send')
-            $timeout(function () {
-                // ////console.log(data);
-                // self.listConver.filter(function(conver) { return conver.id==data.idConversation; })[0].Messages.push(data);
-                // $timeout(function(){
-                //     listMessage.scrollTop(listMessage[0].scrollHeight);
-                // }, 500);
-                var thisUsr = auth.getThisUser();
-                var isSendMsg = thisUsr.id === data.User.id;
-                if (!isSendMsg) _toastr2.default.success('Receive a new message');
-                console.log({ data: data });
-                console.log({ thisUsr: thisUsr });
-                cb(data, isSendMsg);
+        onConnect(function () {
+            socket.on(_socketEvent.SEND_MESSAGE, function (data) {
+                ////console.log('send')
+                $timeout(function () {
+                    // ////console.log(data);
+                    // self.listConver.filter(function(conver) { return conver.id==data.idConversation; })[0].Messages.push(data);
+                    // $timeout(function(){
+                    //     listMessage.scrollTop(listMessage[0].scrollHeight);
+                    // }, 500);
+                    var thisUsr = auth.getThisUser();
+                    var isSendMsg = thisUsr.id === data.User.id;
+                    if (!isSendMsg) _toastr2.default.success('Receive a new message');
+                    console.log({ data: data });
+                    console.log({ thisUsr: thisUsr });
+                    cb(data, isSendMsg);
+                });
             });
         });
     }
@@ -52279,9 +52290,11 @@ function service($timeout, $rootScope, auth) {
     }
 
     function onNewConversation(cb) {
-        socket.on(_socketEvent.NEW_CONVERSATION, function (data) {
-            cb(data);
-            // toastr.success('Receive a new message')
+        onConnect(function () {
+            socket.on(_socketEvent.NEW_CONVERSATION, function (data) {
+                cb(data);
+                // toastr.success('Receive a new message')
+            });
         });
     }
 

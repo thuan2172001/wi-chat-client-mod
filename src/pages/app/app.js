@@ -128,6 +128,8 @@ function controller(api, auth, io) {
 
             return  new Date(lastMsgSendAtB.sendAt) - new Date(lastMsgSendAtA.sendAt) 
         })
+
+        console.log({'self.listPeople':self.listPeople})
     }
 
     function seenMsg(people) {
