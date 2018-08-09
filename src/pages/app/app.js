@@ -55,7 +55,10 @@ function controller(api, auth, io) {
         console.log({receivMsgConver})
         if(receivMsgConver && receivMsgConver.Messages && receivMsgConver.Messages.length){
             receivMsgConver.Messages.push(data)
-            sortPeopleByLatestMsg()
+            ++self.unseenMesgNum
+            decideSeenYetForConv(receivMsgConver)
+
+            // sortPeopleByLatestMsg()
         }
         else {
             // toastr.warning('wait a few secs')
@@ -94,8 +97,8 @@ function controller(api, auth, io) {
             })
 
             sortPeopleByLatestMsg()
-            console.log({'listPeople': self.listPeople})
-            console.log({'listMessage': self.listMessage})
+            // console.log({'listPeople': self.listPeople})
+            // console.log({'listMessage': self.listMessage})
         })
     }
 
@@ -134,6 +137,8 @@ function controller(api, auth, io) {
 
     function seenMsg(people) {
         //console.log({"self.unseenMesgNum" :self.unseenMesgNum})
+        console.log(!people.isSeenMsgFrom)
+        console.log(self.unseenMesgNum > 0)
         if(!people.isSeenMsgFrom && self.unseenMesgNum > 0) {
             self.unseenMesgNum = self.unseenMesgNum -1
             people.isSeenMsgFrom = true
@@ -146,10 +151,25 @@ function controller(api, auth, io) {
                 nameConversation: people.name
             }, auth.getToken(), (resp) => {
                 
-                //console.log('seen msg')
+                console.log('seen msg')
+                console.log({'people.name': people.name})
                 if(!resp) console.log('err')
                 else console.log(resp)
             })
+        }
+    }
+
+    function decideSeenYetForConv(receivMsgConver) {
+        // console.log(receivMsgConver.name === self.curConverName)
+        if(receivMsgConver.name === self.curConverName) {
+
+            //simulate a people with name is that
+            //just to pass this function 
+            //src code is right above
+            //just to make current conversation seen
+            seenMsg({name:self.curConverName, isSeenMsgFrom:false})
+        } else {
+            receivMsgConver.isSeenMsgFrom = false
         }
     }
 

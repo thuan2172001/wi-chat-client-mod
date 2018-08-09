@@ -3,8 +3,8 @@ import template from './chatBoard.html'
 
 const name = 'chatBoard'
 
-controller.$inject = ['auth', 'api', 'io']
-function controller(auth, api, io) {
+controller.$inject = ['auth', 'api', 'io', 'ui']
+function controller(auth, api, io, ui) {
 
     const self = this
 
@@ -22,6 +22,7 @@ function controller(auth, api, io) {
             // ////console.log({data})
             // ////console.log({'self.listMesg' : self.listMessage})
             self.sendMessageSuccess(data)
+            ui.finishReceiveMessage()
             ////console.log({data})
             //scroll to bottom
             scroll()

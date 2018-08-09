@@ -3,13 +3,18 @@ import './sidebar.scss'
 
 const name = 'sidebar'
 
-controller.$inject = []
-function controller() {
+controller.$inject = ['ui']
+function controller(ui) {
 
     const self = this
 
     self.$onInit = function () {
         preProcess()
+
+        ui.onFinishReceiveMessage(() => {
+            sortPeopleByLatestMsg()
+            preProcess()
+        })
     }
 
     self.$onChanges = function({listPeople}) {
@@ -50,10 +55,20 @@ function controller() {
 
             return people
         })
-
         
     }
 
+    function sortPeopleByLatestMsg() {
+        self.listPeople.sort((a, b) => {
+            const lastMsgSendAtA = a.Messages[a.Messages.length - 1]
+            const lastMsgSendAtB = b.Messages[b.Messages.length - 1]
+            // console.log({lastMsgSendAtA: lastMsgSendAtA.content})
+            // console.log({lastMsgSendAtB:lastMsgSendAtB.content})
+            return  new Date(lastMsgSendAtB.sendAt) - new Date(lastMsgSendAtA.sendAt) 
+        })
+
+        // console.log({'self.listPeople':self.listPeople})
+    }   
 
 }
 
@@ -70,3 +85,4 @@ export default {
         controllerAs: 'self'
     }
 }
+
