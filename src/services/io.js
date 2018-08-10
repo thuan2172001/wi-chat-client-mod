@@ -6,11 +6,14 @@ import toastr from 'toastr'
 const name = 'io'
 
 
-service.$inject = ['$timeout', '$rootScope', 'auth']
-function service($timeout, $rootScope, auth) {
+service.$inject = ['$timeout', '$rootScope']
+function service($timeout, $rootScope) {
 
     const SOCKET_CONNECT = 'SOCKET_CONNECT'
     let socket
+
+    // connect()
+
 
     function connect() {
         socket = io(ROOT)
@@ -28,10 +31,14 @@ function service($timeout, $rootScope, auth) {
                 // $timeout(function(){
                 //     listMessage.scrollTop(listMessage[0].scrollHeight);
                 // }, 500);
-                const thisUsr = auth.getThisUser()
-                const isSendMsg = thisUsr.id === data.User.id
-                if (!isSendMsg) toastr.success('Receive a new message')
-                _emit(SEND_MESSAGE, {data, isSendMsg})
+                try {
+                    const thisUsr = JSON.parse(localStorage.getItem('data_user'))
+                    const isSendMsg = thisUsr.id === data.User.id
+                    if (!isSendMsg) toastr.success('Receive a new message')
+                    _emit(SEND_MESSAGE, {data, isSendMsg})
+                } catch (e) {
+                    console.log(e)
+                }
                 // cb(data, isSendMsg)
             })
         });
@@ -41,6 +48,10 @@ function service($timeout, $rootScope, auth) {
             toastr.success('Receive a new message')
             _emit(NEW_CONVERSATION, data)
         })
+    }
+
+    function disconnect() {
+        socket.disconnect()
     }
 
     function onConnect(cb) {
@@ -93,7 +104,8 @@ function service($timeout, $rootScope, auth) {
         connect,
         joinRoom,
         onConnect,
-        onNewConversation
+        onNewConversation,
+        disconnect
     }
 
 }

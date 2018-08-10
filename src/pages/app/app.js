@@ -17,8 +17,8 @@ function controller(api, auth, io) {
         init()
 
 
-        io.onNewConversation(() => {
-            init()
+        io.onNewConversation((data) => {
+            console.log({'new-conver-data': data})
         })
     }
 

@@ -1,7 +1,7 @@
 const name = 'auth'
 
-service.$inject = ['$rootScope', '$http']
-function service($rootScope, $http) {
+service.$inject = ['$rootScope', '$http', 'io']
+function service($rootScope, $http, io) {
     const jwt_token = 'jwt-token'
     const data_user = 'data_user'
     const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -45,6 +45,7 @@ function service($rootScope, $http) {
     function logout() {
         localStorage.removeItem(jwt_token)
         $rootScope.$emit(LOGOUT_SUCCESS)
+        io.disconnect()
     }
 
     function onLoginSuccess(cb) {

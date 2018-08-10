@@ -11,6 +11,14 @@ function controller($rootScope) {
         preProcess()
     }
 
+    self.$onChanges = function({imgSrc, userName}) {
+        if(imgSrc) self.imgSrc = imgSrc.currentValue
+        if(userName) self.userName = userName.currentValue
+        preProcess()
+        // console.log({imgSrc: self.imgSrc})
+        // console.log({userName:self.userName})
+    }
+
     // self.genUniqueId = function() {
     //     const prefix = '__avatar__component__'
 
