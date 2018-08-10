@@ -12,13 +12,27 @@ function controller(api, auth, io) {
     const {username} = auth.getData()
     const thisUser = auth.getThisUser()
 
+    // a list get from server
+    // it haven't filter the user without messages yet
+    let _listPeople = []
+
     self.$onInit = function () {
         preProcess()
         init()
 
 
         io.onNewConversation((data) => {
-            console.log({'new-conver-data': data})
+            console.log({data})
+            _listPeople.unshift({
+                Messages:[],
+                id:6,
+                name:data.name
+            })
+            console.log({_listPeople})
+            io.joinRoom({
+                username,
+                idConversation: data.id
+            })
         })
     }
 
@@ -45,26 +59,79 @@ function controller(api, auth, io) {
         seenMsg(people)
     }
 
+    // self.sendMessageSuccess = function(data) {
+    //     ////console.log({'self.listMessage': self.listMessage})
+    //     //console.log({data})
+    //     ++self.unseenMesgNum
+    //     data.isSent = () => data.User.username === username
+    //     // self.listMessage.push(data)
+
+    //     console.log({data})
+    //     console.log({_listPeople})
+    //     const receivMsgConver = findInArr(self.listPeople, msg => msg.Messages[0].idConversation === data.idConversation)
+    //     // console.log({receivMsgConver})
+    //     if(receivMsgConver && receivMsgConver.Messages && receivMsgConver.Messages.length){
+    //         receivMsgConver.Messages.push(data)
+    //         decideSeenYetForConv(receivMsgConver)
+            
+    //         // sortPeopleByLatestMsg()
+    //     }
+    //     else {
+    //         // toastr.warning('wait a few secs')
+    //         console.log({receivMsgConverNewPerson:receivMsgConver})
+            
+    //         const newPeople = _listPeople.filter(p => (p.name === data.User.username ||
+    //             p.name === 'Help_Desk-' + data.User.username))[0]
+    //         if(newPeople) {
+
+    //             newPeople.Messages.push(data)
+    //             newPeople.isSeenMsgFrom = false
+    //             console.log({'self.listPeople':self.listPeople})
+    //             self.listPeople.unshift(newPeople)
+    //             console.log({newPeople})
+    //             console.log({'self.listPeople':self.listPeople})
+    //         }
+    //     }
+        
+    // }
+
     self.sendMessageSuccess = function(data) {
         ////console.log({'self.listMessage': self.listMessage})
         //console.log({data})
+        ++self.unseenMesgNum
         data.isSent = () => data.User.username === username
         // self.listMessage.push(data)
 
+        console.log({data})
+        console.log({_listPeople})
+        console.log('asdj')
         const receivMsgConver = findInArr(self.listPeople, msg => msg.Messages[0].idConversation === data.idConversation)
-        console.log({receivMsgConver})
+        // console.log({receivMsgConver})
         if(receivMsgConver && receivMsgConver.Messages && receivMsgConver.Messages.length){
+            console.log('receive')
             receivMsgConver.Messages.push(data)
-            ++self.unseenMesgNum
             decideSeenYetForConv(receivMsgConver)
+            
 
             // sortPeopleByLatestMsg()
+            
+        } else {
+            const newPeople = _listPeople.filter(p => (p.name === data.User.username ||
+                p.name === 'Help_Desk-' + data.User.username))[0]
+            if(newPeople) {
+
+                newPeople.Messages.push(data)
+                newPeople.isSeenMsgFrom = false
+                console.log({'self.listPeople':self.listPeople})
+                // self.listPeople.unshift(newPeople)
+                self.listPeople = [newPeople].concat(self.listPeople)
+                console.log({newPeople})
+                console.log({'self.listPeople':self.listPeople})
+            }
         }
-        else {
-            // toastr.warning('wait a few secs')
-        }
-        
     }
+
+
 
     function preProcess() {
         self.listPeople = []
@@ -82,6 +149,7 @@ function controller(api, auth, io) {
         // const token = auth.getToken()
         // const {username} = auth.getData()
         api.getListConversation(token, {username}, (resp) => {
+            _listPeople = resp.list
             self.listPeople = resp.list
                 .filter(p => p.Messages.length)
                 .map(p => {
@@ -99,6 +167,25 @@ function controller(api, auth, io) {
             sortPeopleByLatestMsg()
             // console.log({'listPeople': self.listPeople})
             // console.log({'listMessage': self.listMessage})
+
+
+
+
+
+
+
+
+
+
+
+            ///////////////test///////////
+
+            // _listPeople.filter(p => p.name === 'Help_Desk-chat5')[0].Messages = []
+            // self.listPeople = self.listPeople.filter(p => p.name !== 'Help_Desk-chat5')
+            // const data = '{"content":"lalalala","type":"text","idSender":13,"idConversation":12,"User":{"id":13,"username":"chat5","password":"=========================","role":2,"color":"#46CC12"},"sendAt":"2018-08-10T09:46:31.302Z"}'
+            // // const data = '{"content":"sadf","type":"text","idSender":13,"idConversation":13,"User":{"id":13,"username":"chat6","password":"=========================","role":2,"color":"#46CC12"},"sendAt":"2018-08-10T09:46:31.302Z"}'
+            
+            // self.sendMessageSuccess(JSON.parse(data))
         })
     }
 
