@@ -1,3 +1,4 @@
+import toastr from 'toastr'
 import template from './chatBoard.html'
 // import './chatBoard.css'
 
@@ -29,6 +30,7 @@ function controller(auth, api, io, ui) {
         })
 
         enableEnterSubmit()
+        // console.log({converName: self.converName})
     }
 
     self.$onChanges = function ({ listMessage, curConverId, thisUser }) {
@@ -142,7 +144,12 @@ function controller(auth, api, io, ui) {
     }
 
     function checkSubmit(cb) {
-        if (self.text) cb()
+        if(!self.converName) {
+            toastr.error('No conversation is chosen')
+        }
+        else if (self.text) {
+            cb()
+        }
     }
 
     function enableEnterSubmit() {
@@ -152,7 +159,7 @@ function controller(auth, api, io, ui) {
         })
 
         document.querySelector('.mesgs').addEventListener('keyup', function(e) {
-            const submitBtn = document.querySelector('.msg_send_btn')
+            const submitBtn = document.querySelector('#chat-board-submit')
             e.preventDefault()
             if(e.keyCode === 13) {
                 if(!e.shiftKey) submitBtn.click()
