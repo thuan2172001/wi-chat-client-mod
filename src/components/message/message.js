@@ -70,7 +70,8 @@ export default {
             text: '<',
             time: '<',
             isSentMesg: '<',
-            type: '<'
+            type: '<',
+            isShowAvatar: '<'
         },
         template,
         controller,

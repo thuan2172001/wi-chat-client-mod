@@ -112,6 +112,15 @@ function controller(auth, api, io, ui) {
 
     }
 
+    self.isShowAvatar = function(i) {
+        if(!self.listMessage || !self.listMessage.length) return false
+        if(i === 0) return true
+        // console.log({'self.listMessage':self.listMessage})
+
+        return self.listMessage[i].User.id !== self.listMessage[i-1].User.id
+        
+    }
+
     function preProcess() {
         self.text = ''
     }

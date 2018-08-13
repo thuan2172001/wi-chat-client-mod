@@ -1,15 +1,17 @@
 <div class="message-component">
     <div ng-if="!self.isSentMesg">
         <div class="incoming_msg">
-            <div class="incoming_msg_img">
+            <div class="incoming_msg_img" >
                 <!-- <img ng-if="!self.avatar" ng-src="https://ptetutorials.com/images/user-profile.png">
                 <img ng-if="self.avatar" ng-src="{{self.avatar}}"> -->
                 <avatar
-                    img-src="self.avatar"
-                    user-name="self.userName">
+                 ng-show="self.isShowAvatar"
+                 img-src="self.avatar"
+                 user-name="self.userName">
                 </avatar>
                 <span 
                  class="time_date" 
+                 ng-show="self.isShowAvatar"
                  style="margin: 0 0 0 5px; "
                  ng-bind="self.userName"></span>
             </div>

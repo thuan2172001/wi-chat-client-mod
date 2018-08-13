@@ -31,10 +31,14 @@ function controller($rootScope) {
     //     return Math.floor(Math.random() * PARAM)
     // }
     function strToNum(str) {
-        const first = str.charCodeAt(0) || 0
-        const sec = str.charCodeAt(1) || 0
+        // const first = str.charCodeAt(0) || 0
+        // const sec = str.charCodeAt(1) || 0
+        let val = 0
+        for(let i = 0; i < str.length; ++i) {
+            val += Math.pow(str.charCodeAt(i),2)
+        }
 
-        return first + sec
+        return val
     }
 
     function preProcess() {

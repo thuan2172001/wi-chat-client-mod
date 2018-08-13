@@ -7,13 +7,14 @@
     <div class="mesgs">
         <div class="msg_history" style="height: 77%;">
             <message 
-             ng-repeat="m in self.listMessage track by $index"
+             ng-repeat="(i,m) in self.listMessage track by $index"
              user-name="m.User.username"
              avatar="m.avatar"
              text="m.content"
              is-sent-mesg="m.isSent()"
              time="m.sendAt"
-             type="m.type">
+             type="m.type"
+             is-show-avatar="self.isShowAvatar(i)">
             </message>
         
         </div>
@@ -29,8 +30,7 @@
                  type="submit" 
                  style="margin-right: 35px;background: white; color: #05728f;"
                  ngf-select="self.upload($files)"
-                 multiple="multiple"
-                 ngf-accept="'image/*'">
+                 multiple="multiple">
                     <i class="fas fa-paperclip"></i>
                 </button>
                 <button id="chat-board-submit"class="msg_send_btn" type="submit" ng-click="self.submitText()">
