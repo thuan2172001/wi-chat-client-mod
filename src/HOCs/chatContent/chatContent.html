@@ -11,8 +11,16 @@
 </img-preview>
 
 <a
- style="color: cyan"
- ng-if="self.isFile()"
+ ng-if="self.isFile() && self.isReceivMessage"
  href="{{self.content}}" 
  ng-bind="self.content">
 </a>
+
+<a
+ style="color: rgb(149, 236, 184)"
+ ng-if="self.isFile() && !self.isReceivMessage"
+ href="{{self.content}}" 
+ ng-bind="self.content">
+</a>
+
+<!-- rgb(149, 236, 184) -->

@@ -40,7 +40,8 @@ export default {
     options: {
         bindings: {
             content: '<',
-            type: '<'
+            type: '<',
+            isReceivMessage:'<'
         },
         template,
         controller,
