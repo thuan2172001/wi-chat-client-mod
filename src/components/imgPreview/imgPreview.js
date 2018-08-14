@@ -143,10 +143,11 @@ function controller() {
         const background = document.getElementById(self._zoomBackground);
         const insideImg = document.getElementById(self._modalImg);
 
-        const INSIDE_IMG_SIZE = 90;  //90%
+        const INSIDE_IMG_SIZE = 100;  //90%
         let zoomRate = 1;
 
         background.style.backgroundImage = `url('${self.fullImgLink}')`;
+        background.style.backgroundSize = '150%'
         ////console.log({'self.fullIMGLinkd': self.fullImgLink});
         function enableZoom() {
             background.onmousemove = function (e) {
@@ -163,11 +164,15 @@ function controller() {
                 //the img-size if 90% //css-file
                 //so default is img hide => zoom => change coord of center => zoom custom
                 // zoomer.style.backgroundImage = `url('${self.fullImgLink}')`;
-                e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
-                e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
-                x = offsetX / zoomer.offsetWidth * 100
-                y = offsetY / zoomer.offsetHeight * 100
-                zoomer.style.backgroundPosition = x + '% ' + y + '%';
+                try {
+                    e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+                    e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+                    x = offsetX / zoomer.offsetWidth * 100
+                    y = offsetY / zoomer.offsetHeight * 100
+                    zoomer.style.backgroundPosition = x + '% ' + y + '%';
+                } catch (e) {
+                    
+                }
             }
 
             background.onmouseout = function(e) {
@@ -183,10 +188,12 @@ function controller() {
         function zoomIn() {
             invisibleImgInside();
             if (zoomRate <= 9)++zoomRate;
-            const ZOOM_SIZE = zoomRate + INSIDE_IMG_SIZE;
+            // const ZOOM_SIZE = zoomRate + INSIDE_IMG_SIZE;
+            const ZOOM_SIZE = zoomRate * INSIDE_IMG_SIZE;
 
             // if(ZOOM_SIZE >= 100) ZOOM_SIZE = 100;
-            background.style.backgroundSize = ZOOM_SIZE;
+            // background.style.backgroundSize = ZOOM_SIZE;
+            background.style.backgroundSize = ZOOM_SIZE + '%'
 
             disableZoomHover();
         }
@@ -197,7 +204,8 @@ function controller() {
             const ZOOM_SIZE = zoomRate + INSIDE_IMG_SIZE;
 
             // if(ZOOM_SIZE <= INSIDE_IMG_SIZE) ZOOM_SIZE = INSIDE_IMG_SIZE;
-            background.style.backgroundSize = ZOOM_SIZE;
+            // background.style.backgroundSize = ZOOM_SIZE;
+            background.style.backgroundSize = ZOOM_SIZE + '%';
 
             disableZoomHover();
         }

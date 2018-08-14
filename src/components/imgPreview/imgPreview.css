@@ -155,3 +155,13 @@
         transform: translate3d(-1692px, 0, 0);
       }
 }
+
+/* icon */
+
+.img-preview .material-icons {
+    color: #999
+}
+
+/* .img-preview .material-icons :hover {
+    color: white
+} */
