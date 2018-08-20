@@ -6,10 +6,12 @@ const URL = require('../constants/url').ROOT
 // const URL = 'http://192.168.11.109:5001';
 const LOGIN = URL + '/login';
 const REGISTER = URL + '/register';
-const GET_LIST_CONVERSATION = URL + '/api/list/conversation';
+// const GET_LIST_CONVERSATION = URL + '/api/list/conversation';
+const GET_LIST_CONVERSATION = URL + '/api/conversation/list/admin';
 const GET_CONVERSATION = URL + '/api/conversation';
 const POST_MESSAGE = URL + '/api/message/new';
-const SEEN_MESSAGE = URL + '/api/seenMessage'
+// const SEEN_MESSAGE = URL + '/api/seenMessage'
+const SEEN_MESSAGE = URL + '/api/message/seen'
 const UPLOAD = URL + '/api/upload';
 const THUMB = URL + '/api/thumb';
 // angular.module(moduleName, []).service(serviceName, );
