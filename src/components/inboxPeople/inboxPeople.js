@@ -5,6 +5,12 @@ const name = 'inboxPeople'
 
 function controller() {
     const self = this
+    let type = 'text'
+    
+
+    self.$onChanges = function({msgType}) {
+        if(msgType) type = msgType.currentValue
+    }
     
     self.showName = function() {
         const prefix = 'Help_Desk-'
@@ -13,6 +19,21 @@ function controller() {
     }
     
     self.showMsg = function() {
+        if(type === 'text') return displayTextMsg()
+        if(type === 'image') return displayImageMsg()
+        if(type === 'file') return displayFileMsg()
+    }
+
+    function limitStrLen(str, len) {
+        const MIN = 3
+        if(len < 3) len = 3
+
+        if(str.length > len) return str.substr(0, len - 3) + '...'
+        
+        return str
+    }
+    
+    function displayTextMsg() {
         const text = self.latestMesg || ''
         const br1 = '&ltbr&gt'
         const br2 = '&ltbr/&gt'
@@ -33,15 +54,13 @@ function controller() {
         return limitStrLen(result, LIMIT_LEN)
     }
 
-    function limitStrLen(str, len) {
-        const MIN = 3
-        if(len < 3) len = 3
-
-        if(str.length > len) return str.substr(0, len - 3) + '...'
-        
-        return str
+    function displayImageMsg() {
+        return 'Tin nhắn là một hình ảnh'
     }
-    
+
+    function displayFileMsg() {
+        return 'Tin nhắn là một file'
+    }
 }
 
 export default {
@@ -52,7 +71,8 @@ export default {
             peopleName: '<',
             latestMesg: '<',
             time:'<',
-            isSeenYet: '<'
+            isSeenYet: '<',
+            msgType:'<'
         },
         template,
         controller,

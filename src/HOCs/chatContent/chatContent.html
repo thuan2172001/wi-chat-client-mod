@@ -13,14 +13,14 @@
 <a
  ng-if="self.isFile() && self.isReceivMessage"
  href="{{self.content}}" 
- ng-bind="self.content">
+ ng-bind="self.toFileString()">
 </a>
 
 <a
  style="color: rgb(149, 236, 184)"
  ng-if="self.isFile() && !self.isReceivMessage"
  href="{{self.content}}" 
- ng-bind="self.content">
+ ng-bind="self.toFileString()">
 </a>
 
 <!-- rgb(149, 236, 184) -->

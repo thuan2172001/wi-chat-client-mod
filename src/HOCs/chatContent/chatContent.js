@@ -33,6 +33,14 @@ function controller(auth) {
         let p = self.content.slice(lengthUrl+1);
         return ROOT + '/api/imageOrigin/'+p+'?token='+token;
     }
+
+    self.toFileString = () => {
+        const str = self.content
+        const separator = '(+07)'
+        const str_separated = str.split(separator)
+        // console.log({str_separated})
+        return str_separated[str_separated.length - 1]
+    }
 }
 
 export default {
