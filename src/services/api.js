@@ -16,8 +16,8 @@ const UPLOAD = URL + '/api/upload';
 const THUMB = URL + '/api/thumb';
 // angular.module(moduleName, []).service(serviceName, );
 
-service.$inject = ['$http', 'Upload']
-function service ($http, Upload) {
+service.$inject = ['$http', 'Upload', '$rootScope']
+function service ($http, Upload, $rootScope) {
     let doPost = function(URL, token, data, cb) {
         $http({
             method: 'POST',
@@ -36,6 +36,16 @@ function service ($http, Upload) {
         }, function errorCallback(response) {
             //console.error(response);
             // if(toastr) toastr.error(response);
+
+            //token expired
+            const TOKEN_EXPIRED = 'Failed to authenticate'
+            if(response.data && response.data.message === TOKEN_EXPIRED) {
+
+                localStorage.removeItem('jwt-token');
+                $rootScope.$emit(TOKEN_EXPIRED);
+                return
+            }
+
             cb();
         });
     }

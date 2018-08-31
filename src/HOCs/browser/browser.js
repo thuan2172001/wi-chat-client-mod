@@ -17,6 +17,10 @@ function controller(auth) {
         auth.onLogoutSuccess(() => {
             self.isLogin = false
         })
+
+        auth.onJwtTokenExpired(() => {
+            self.isLogin = false
+        })
     }
 
     function preProcess() {

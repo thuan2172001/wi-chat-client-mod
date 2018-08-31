@@ -6,6 +6,7 @@ function service($rootScope, $http, io) {
     const data_user = 'data_user'
     const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
     const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+    const TOKEN_EXPIRED = 'Failed to authenticate'
 
     function isLogin() {
         return !!(localStorage.getItem(jwt_token))
@@ -59,6 +60,12 @@ function service($rootScope, $http, io) {
             cb()
         })
     }
+
+    function onJwtTokenExpired(cb) {
+        $rootScope.$on(TOKEN_EXPIRED, (e, data) => {
+            cb()
+        })
+    }
     
 
     function loginSuccess(token, user) {
@@ -89,7 +96,8 @@ function service($rootScope, $http, io) {
         onLogoutSuccess,
         getToken,
         getData,
-        getThisUser
+        getThisUser,
+        onJwtTokenExpired
     }
 }
 
