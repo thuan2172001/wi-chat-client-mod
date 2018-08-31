@@ -39,7 +39,7 @@ function service ($http, Upload, $rootScope) {
 
             //token expired
             const TOKEN_EXPIRED = 'Failed to authenticate'
-            if(response.data && response.data.message === TOKEN_EXPIRED) {
+            if(response.data && response.data.code === 401) {
 
                 localStorage.removeItem('jwt-token');
                 $rootScope.$emit(TOKEN_EXPIRED);
