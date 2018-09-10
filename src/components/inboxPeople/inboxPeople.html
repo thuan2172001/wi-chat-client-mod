@@ -15,6 +15,7 @@
             
         <div class="chat_ib">
             <h5 ng-class="{'not-seen-msg' : !self.isSeenYet}">{{self.showName()}}
+                <div class="badge badge-secondary" style="vertical-align:middle;padding-bottom: 0px">New</div>
                 <span class="chat_date">
                     {{self.time | date: "MM/dd/yyyy 'at' h:mma"}}
                 </span>
