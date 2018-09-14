@@ -17,7 +17,8 @@
             <h5 ng-class="{'not-seen-msg' : !self.isSeenYet}">{{self.showName()}}
                 <div 
                  class="badge badge-secondary" 
-                 style="vertical-align:middle;padding-bottom: 0px"
+                 style="vertical-align:middle;padding-bottom: 0px;"
+                 ng-style="{'background-color':self.labelColor}"
                  ng-bind="self.company">
                 </div>
                 <span class="chat_date">
