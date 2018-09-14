@@ -14,6 +14,8 @@ const POST_MESSAGE = URL + '/api/message/new';
 const SEEN_MESSAGE = URL + '/api/message/seen'
 const UPLOAD = URL + '/api/upload';
 const THUMB = URL + '/api/thumb';
+const LIST_COMPANY = URL + '/api/company/list'
+const LIST_USER = URL + '/api/user/list'
 // angular.module(moduleName, []).service(serviceName, );
 
 service.$inject = ['$http', 'Upload', '$rootScope']
@@ -123,6 +125,15 @@ function service ($http, Upload, $rootScope) {
     this.thumb = (data, token, cb) => {
         doPost(THUMB, token, data, cb);
     };
+
+    this.getAllUser = (token, data, cb) => {
+        doPost(LIST_USER, token, data, cb)
+    }
+
+    this.getAllCompany = (token, data, cb) => {
+        doPost(LIST_COMPANY, token, data, cb)
+    }
+
     return this;
 }
 

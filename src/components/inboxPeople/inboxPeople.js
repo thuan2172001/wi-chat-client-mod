@@ -3,10 +3,17 @@ import template from './inboxPeople.html'
 
 const name = 'inboxPeople'
 
-function controller() {
+controller.$inject = ['dict']
+function controller(dict) {
     const self = this
     let type = 'text'
     
+    self.$onInit = function() {
+        dict.usernameToCompany(self.showName(), (name) => {
+            self.company = name
+            console.log({name})
+        })
+    }
 
     self.$onChanges = function({msgType}) {
         if(msgType) type = msgType.currentValue
