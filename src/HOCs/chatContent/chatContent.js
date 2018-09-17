@@ -41,6 +41,13 @@ function controller(auth) {
         // console.log({str_separated})
         return str_separated[str_separated.length - 1]
     }
+    
+    self.toDownloadableLink = () => {
+        const token = auth.getToken()
+        const path = self.content
+        const p = path.slice(lengthUrl + 1)
+        return ROOT + '/api/download/' + p + '?token=' + token
+    }
 }
 
 export default {
