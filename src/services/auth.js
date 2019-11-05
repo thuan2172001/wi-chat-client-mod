@@ -14,7 +14,8 @@ function service($rootScope, $http, io) {
 
     function loginSubmit(data, cb) {
 
-        const URL = require('../constants/url').ROOT
+        let urls = require('../constants/url');
+        const URL = urls[(process.env.NODE_ENV || '').trim()] || urls.dev;
         // const URL = 'http://chat.dev.i2g.cloud';
         // const URL = 'http://api.chat.dev.i2g.cloud/'
         // const URL = 'http://127.0.0.1:5001';

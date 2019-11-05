@@ -1,5 +1,6 @@
 import { SEND_MESSAGE, JOIN_ROOM, NEW_CONVERSATION } from '../constants/socketEvent'
-import { ROOT } from '../constants/url'
+let urls = require('../constants/url');
+const ROOT = urls[(process.env.NODE_ENV || '').trim()] || urls.dev;
 import io from 'socket.io-client'
 import toastr from 'toastr'
 

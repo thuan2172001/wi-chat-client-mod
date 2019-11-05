@@ -1,2 +1,5 @@
-// export const ROOT = 'http://api.chat.dev.i2g.cloud'
-export const ROOT = 'http://chat.dev.i2g.cloud'
+module.exports = {
+    local: 'http://localhost:5001',
+    dev: 'http://chat.dev.i2g.cloud',
+    prod: 'https://chat.i2g.cloud/'
+}
