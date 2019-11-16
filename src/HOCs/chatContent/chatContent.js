@@ -1,5 +1,7 @@
 import template from './chatContent.html'
-import {ROOT} from '../../constants/url'
+let urls = require('../../constants/url');
+console.log(process.env.NODE_ENV)
+const ROOT = urls[(process.env.NODE_ENV || '').trim()] || urls['dev'];
 // import './app.scss'
 
 const name = 'chatContent'
