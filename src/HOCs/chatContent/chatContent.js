@@ -47,7 +47,7 @@ function controller(auth) {
     self.toDownloadableLink = () => {
         const token = auth.getToken()
         const path = self.content
-        const p = path.slice(lengthUrl + 1)
+        const p = path.slice(lengthUrl)
         return ROOT + '/api/download/' + p + '?token=' + token
     }
 }
