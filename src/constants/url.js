@@ -1,5 +1,5 @@
 module.exports = {
-    local: 'http://localhost:5001',
-    dev: 'http://chat.dev.i2g.cloud',
+    local: 'http://localhost:4200',
+    dev: 'http://localhost:4200',
     prod: 'https://chat.i2g.cloud'
 }

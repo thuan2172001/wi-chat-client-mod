@@ -14,6 +14,7 @@ function controller(dict) {
         self.labelColor = ''
 
         dict.usernameToCompany(self.showName(), (name) => {
+            console.log({name})
             self.company = name
             self.labelColor = strToColor(name)
         })

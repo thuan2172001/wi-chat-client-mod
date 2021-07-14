@@ -21,13 +21,17 @@ function service($rootScope, api, auth) {
 
         api.getAllUser(token, {token}, data => {
             users = data.body.content
+            // console.log(data)
+            // users = data.content
             fetchUserDone = true
             if(fetchCompanyDone) $rootScope.$emit(FETCHING_DONE)
         })
 
 
         api.getAllCompany(token, {token}, data => {
+            // console.log(data)
             companies = data.body.content
+            // companies = data.content
             fetchCompanyDone = true
             if(fetchUserDone) $rootScope.$emit(FETCHING_DONE)
         })
@@ -44,12 +48,11 @@ function service($rootScope, api, auth) {
 
     function usernameToCompany(username, cb) {
         getDataReady(() => {
-
             const dictType = USERNAME_TO_COMPANY
             const _dict = {}
 
             if (dictType in dict) {
-                return cb(dict[dictType][username])
+                return dict[dictType][username] && cb(dict[dictType][username])
             } 
 
             for (let u of users) {
@@ -57,7 +60,7 @@ function service($rootScope, api, auth) {
             }
             console.log(_dict[username])
             dict[dictType] = _dict
-            cb(_dict[username])
+            _dict[username] && cb(_dict[username])
         })
     }
 

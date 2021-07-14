@@ -10,7 +10,7 @@ controller.$inject = ['auth']
 function controller(auth) {
     const self = this
     const IMG = 'image'
-    const TEXT= 'text'
+    const TEXT = 'text'
     const FILE = 'file'
 
     const lengthUrl = ROOT.length
@@ -21,19 +21,20 @@ function controller(auth) {
     self.isText = () => self.type === TEXT
     self.isFile = () => self.type === FILE
 
-    self.imgThumb = () =>  {
+    self.imgThumb = () => {
         let p = self.content.slice(lengthUrl);
-        return ROOT + '/api/thumb/'+p+'?token='+token
+        console.log({ p })
+        return ROOT + '/api/thumb/' + p + '?token=' + token
     }
 
     self.imgDownload = () => {
         let p = self.content.slice(lengthUrl);
-        return ROOT +'/api/download/'+p+'?token='+token
+        return ROOT + '/api/download/' + p + '?token=' + token
     }
 
     self.imgGetImageOrigin = () => {
         let p = self.content.slice(lengthUrl);
-        return ROOT + '/api/imageOrigin/'+p+'?token='+token;
+        return ROOT + '/api/imageOrigin/' + p + '?token=' + token;
     }
 
     self.toFileString = () => {
@@ -43,11 +44,12 @@ function controller(auth) {
         // console.log({str_separated})
         return str_separated[str_separated.length - 1]
     }
-    
+
     self.toDownloadableLink = () => {
         const token = auth.getToken()
         const path = self.content
         const p = path.slice(lengthUrl)
+        console.log({ p })
         return ROOT + '/api/download/' + p + '?token=' + token
     }
 }
@@ -58,7 +60,7 @@ export default {
         bindings: {
             content: '<',
             type: '<',
-            isReceivMessage:'<'
+            isReceivMessage: '<'
         },
         template,
         controller,

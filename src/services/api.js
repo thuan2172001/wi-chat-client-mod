@@ -1,10 +1,13 @@
 let name = 'api';
 let urls = require('../constants/url');
-const URL = urls[(process.env.NODE_ENV || '').trim()] || urls.dev;
+// const URL = urls[(process.env.NODE_ENV || '').trim()] || urls.dev;
 // const URL = 'http://chat.sflow.me';
 // const URL = 'http://api.chat.dev.i2g.cloud/'
+// const URL = 'https://chat.i2g.cloud';
 // const URL = 'http://127.0.0.1:5001';
 // const URL = 'http://192.168.11.109:5001';
+// const URL = 'http://localhost:3001';
+const URL = 'http://localhost:4200';
 const LOGIN = URL + '/login';
 const REGISTER = URL + '/register';
 // const GET_LIST_CONVERSATION = URL + '/api/list/conversation';
@@ -22,6 +25,8 @@ const LIST_USER = URL + '/api/user/list'
 service.$inject = ['$http', 'Upload', '$rootScope']
 function service ($http, Upload, $rootScope) {
     let doPost = function(URL, token, data, cb) {
+    console.log('hello')
+
         $http({
             method: 'POST',
             url: URL,
@@ -34,7 +39,9 @@ function service ($http, Upload, $rootScope) {
                     //console.error(response.data.reason);
                     cb();
                 } else {
-                    cb(response.data.content);
+                    // cb(response.data.content);
+                    console.log(response.data)
+                    cb(response.data.data);
                 }
         }, function errorCallback(response) {
             //console.error(response);
@@ -44,8 +51,8 @@ function service ($http, Upload, $rootScope) {
             const TOKEN_EXPIRED = 'Failed to authenticate'
             if(response.data && response.data.code === 401) {
 
-                localStorage.removeItem('jwt-token');
-                $rootScope.$emit(TOKEN_EXPIRED);
+                // localStorage.removeItem('jwt-token');
+                // $rootScope.$emit(TOKEN_EXPIRED);
                 return
             }
 
@@ -111,11 +118,12 @@ function service ($http, Upload, $rootScope) {
             fields: data.fields
         }).then(
             (response) => {
+                console.log({response})
                 if (response.data.code != 200) {
                     //console.error(response.data.reason);
                     cb();
                 } else {
-                    cb(response.data.content);
+                    cb(response.data.data.content);
                 }
             },
             (error) => {

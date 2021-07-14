@@ -7,6 +7,7 @@ const name = 'app'
 controller.$inject = ['api', 'auth', 'io']
 function controller(api, auth, io) {
 
+    console.log(auth.getData());
     const self = this
     const token = auth.getToken()
     const {username} = auth.getData()
@@ -40,8 +41,8 @@ function controller(api, auth, io) {
 
         // assign a function return isSent
         people.Messages.forEach(m => {
-            m.isSent = () => m.User.username === username
-            
+            m.isSent = () => m.user.username === username
+            // console.log({m})
             return m
         })
         
@@ -99,7 +100,7 @@ function controller(api, auth, io) {
         ////console.log({'self.listMessage': self.listMessage})
         //console.log({data})
         ++self.unseenMesgNum
-        data.isSent = () => data.User.username === username
+        data.isSent = () => data.user.username === username
         // self.listMessage.push(data)
 
         console.log({data})
@@ -116,8 +117,8 @@ function controller(api, auth, io) {
             // sortPeopleByLatestMsg()
             
         } else {
-            const newPeople = _listPeople.filter(p => (p.name === data.User.username ||
-                p.name === 'Help_Desk-' + data.User.username))[0]
+            const newPeople = _listPeople.filter(p => (p.name === data.user.username ||
+                p.name === 'Help_Desk-' + data.user.username))[0]
             if(newPeople) {
 
                 newPeople.Messages.push(data)

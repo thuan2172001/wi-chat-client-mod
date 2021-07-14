@@ -8,7 +8,7 @@
         <div class="msg_history" style="height: 77%;">
             <message 
              ng-repeat="(i,m) in self.listMessage track by $index"
-             user-name="m.User.username"
+             user-name="m.user.username"
              avatar="m.avatar"
              text="m.content"
              is-sent-mesg="m.isSent()"

@@ -38,11 +38,6 @@ function controller(auth, api, io, ui) {
         if (curConverId) self.curConverId = curConverId.currentValue
         if (thisUser) self.thisUser = thisUser.currentValue
         scroll()
-
-        // ////console.log({ listMessage, curConverId, thisUser })
-
-        // ////console.log(self.listMessage)
-        // ////console.log(self.listMessage[0].User.username)
     }
 
     self.submitText = function () {
@@ -53,12 +48,13 @@ function controller(auth, api, io, ui) {
             let message = {
                 content: preventXSS(content),
                 type: 'text',
-                idSender: self.thisUser.id,
+                idSender: self.thisUser._id,
                 idConversation: self.curConverId,
-                User: self.thisUser,
+                user: self.thisUser,
                 sendAt: new Date((new Date()).getTime())
             };
             api.postMessage(message, auth.getToken(), function (res) {
+                console.log(res)
                 if (res) preProcess()
             });
         })
@@ -94,7 +90,7 @@ function controller(auth, api, io, ui) {
                             type: type == 'image' ? 'image' : 'file',
                             idSender: user.id,
                             idConversation: self.curConverId,
-                            User: user,
+                            user: user,
                             sendAt: new Date((new Date()).getTime())
                         }
                         api.postMessage(message, token, (res) => {
@@ -116,8 +112,7 @@ function controller(auth, api, io, ui) {
         if(!self.listMessage || !self.listMessage.length) return false
         if(i === 0) return true
         // console.log({'self.listMessage':self.listMessage})
-
-        return self.listMessage[i].User.id !== self.listMessage[i-1].User.id
+        return self.listMessage[i].user._id !== self.listMessage[i-1].user._id
         
     }
 

@@ -15,11 +15,15 @@ function service($rootScope, $http, io) {
     function loginSubmit(data, cb) {
 
         let urls = require('../constants/url');
-        const URL = urls[(process.env.NODE_ENV || '').trim()] || urls.dev;
+        // const URL = urls[(process.env.NODE_ENV || '').trim()] || urls.dev;
         // const URL = 'http://chat.dev.i2g.cloud';
+        // const URL = 'https://chat.i2g.cloud';
+        // const URL = 'http://localhost:3001';
+        const URL = 'http://localhost:4200/api';
         // const URL = 'http://api.chat.dev.i2g.cloud/'
         // const URL = 'http://127.0.0.1:5001';
         // const URL = 'http://192.168.11.109:5001';
+        // const URL = 'http://localhost:5001';
         const url = URL + '/login';
 
         $http({
@@ -27,12 +31,14 @@ function service($rootScope, $http, io) {
             url: url,
             data: data
         }).then(function successCallback(response) {
+            console.log(response)
             if (response.data.code != 200) {
                 //console.error(response.data.reason);
                 cb();
             } else {
-                const {token, user} = response.data.content
-                //////console.log({token})
+                // const { token, user } = response.data.content
+                const { token, user } = response.data.data
+                console.log({token})
                 loginSuccess(token, user);
                 cb(token);
 
@@ -67,9 +73,10 @@ function service($rootScope, $http, io) {
             cb()
         })
     }
-    
+
 
     function loginSuccess(token, user) {
+        console.log({token, user})
         $rootScope.$emit(LOGIN_SUCCESS)
         localStorage.setItem(jwt_token, token)
         localStorage.setItem(data_user, JSON.stringify(user))
@@ -81,8 +88,10 @@ function service($rootScope, $http, io) {
 
     function getData() {
         const token = getToken()
+        console.log({token})
         const data = atob(token.split('.')[1])
-        return JSON.parse(data)
+        console.log({data})
+        return JSON.parse(data).user
     }
 
     function getThisUser() {
