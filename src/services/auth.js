@@ -1,4 +1,7 @@
+import { END_POINT_URL } from '../constants/url'
+
 const name = 'auth'
+const urls = require('../constants/url');
 
 service.$inject = ['$rootScope', '$http', 'io']
 function service($rootScope, $http, io) {
@@ -19,12 +22,12 @@ function service($rootScope, $http, io) {
         // const URL = 'http://chat.dev.i2g.cloud';
         // const URL = 'https://chat.i2g.cloud';
         // const URL = 'http://localhost:3001';
-        const URL = 'http://localhost:4200/api';
+        const URL = END_POINT_URL || urls.dev;
         // const URL = 'http://api.chat.dev.i2g.cloud/'
         // const URL = 'http://127.0.0.1:5001';
         // const URL = 'http://192.168.11.109:5001';
         // const URL = 'http://localhost:5001';
-        const url = URL + '/login';
+        const url = URL + '/api/login';
 
         $http({
             method: 'POST',

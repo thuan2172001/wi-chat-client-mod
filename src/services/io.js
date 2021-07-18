@@ -1,10 +1,11 @@
 import { SEND_MESSAGE, JOIN_ROOM, NEW_CONVERSATION } from '../constants/socketEvent'
-let urls = require('../constants/url');
-const ROOT = urls[(process.env.NODE_ENV || '').trim()] || 'http://localhost:4200/' || urls.dev;
+import { END_POINT_URL } from '../constants/url'
 import io from 'socket.io-client'
 import toastr from 'toastr'
 
 const name = 'io'
+const urls = require('../constants/url');
+const ROOT =  END_POINT_URL || urls.dev;
 
 
 service.$inject = ['$timeout', '$rootScope']
@@ -27,27 +28,20 @@ function service($timeout, $rootScope) {
         socket.on(SEND_MESSAGE, function (data) {
             console.log('send')
             $timeout(function () {
-                // ////console.log(data);
-                // self.listConver.filter(function(conver) { return conver.id==data.idConversation; })[0].Messages.push(data);
-                // $timeout(function(){
-                //     listMessage.scrollTop(listMessage[0].scrollHeight);
-                // }, 500);
                 try {
                     const thisUsr = JSON.parse(localStorage.getItem('data_user'))
                     console.log({thisUsr})
                     console.log({data})
-                    const isSendMsg = thisUsr.id === data.user._id
+                    const isSendMsg = thisUsr._id === data.user._id
                     if (!isSendMsg) toastr.success('Receive a new message')
                     _emit(SEND_MESSAGE, {data, isSendMsg})
                 } catch (e) {
                     console.log(e)
                 }
-                // cb(data, isSendMsg)
             })
         });
 
         socket.on(NEW_CONVERSATION, data => {
-            // cb(data)
             toastr.success('New conver')
             _emit(NEW_CONVERSATION, data)
         })
@@ -67,15 +61,13 @@ function service($timeout, $rootScope) {
         console.log(65)
         onConnect(() => {
             _on(SEND_MESSAGE, (data) => {
-                // const {data, isSendMsg} = data
-                console.log({data})
+                // console.log({data})
                 cb(data.data, data.isSendMsg)
             })
         })
     }
 
     function joinRoom(data) {
-        ////console.log('join room')
         socket.emit(JOIN_ROOM, data)
     }
 

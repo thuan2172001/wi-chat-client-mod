@@ -1,10 +1,9 @@
 import template from './chatContent.html'
-let urls = require('../../constants/url');
-console.log(process.env.NODE_ENV)
-const ROOT = urls[(process.env.NODE_ENV || '').trim()] || urls['dev'];
-// import './app.scss'
+import { END_POINT_URL } from '../../constants/url'
 
 const name = 'chatContent'
+const urls = require('../../constants/url');
+const ROOT =  END_POINT_URL || urls.dev;
 
 controller.$inject = ['auth']
 function controller(auth) {
